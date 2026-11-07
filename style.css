@@ -677,13 +677,26 @@ h2 {
 
 /* --- AJEDREZ: las piezas encima del fondo, cada una en su sitio --- */
 
+/* La pantalla del juego mide exactamente lo que la ventana
+   y recorta lo que sobresalga del tablero (overflow: hidden),
+   igual que hace un fondo con background-size: cover. */
 #ajedrez-juego {
     background-image: none;
     justify-content: flex-start;
-    /* menos espacio arriba y entre los textos, para dejar sitio al tablero */
+    position: relative;
+    height: 100vh;
+    overflow: hidden;
     padding-top: 1.5rem;
     padding-bottom: 1.5rem;
     gap: 1rem;
+}
+
+/* los botones, la ronda y el mensaje van ENCIMA del tablero */
+#ajedrez-juego > .navegacion-minijuego,
+#ajedrez-juego > .ronda,
+#ajedrez-juego > .estado-juego {
+    position: relative;
+    z-index: 1;
 }
 
 .ronda {
@@ -692,19 +705,22 @@ h2 {
     text-transform: uppercase;
 }
 
-/* el tablero mantiene la proporción de la imagen (1556 x 1011)
-   para que las piezas, colocadas en %, caigan siempre en su sitio.
+/* EL TABLERO OCUPA TODA LA PANTALLA (como un fondo "cover").
+   Mantiene la proporción de la imagen (1556 x 1011) para que las
+   piezas, colocadas en %, caigan siempre en su sitio.
 
-   Ancho: el MÁS PEQUEÑO de estos dos (eso hace min()):
-   - 85% del ancho de la pantalla, o
-   - lo que cabe de alto: el alto de la ventana (100vh) menos unos
-     16rem que ocupan los botones y textos de arriba (con margen de
-     sobra para que no salga scroll), multiplicado
-     por 1.539 (= 1556 / 1011, la proporción de la imagen).
-   Así el tablero entero se ve sin hacer scroll. */
+   Ancho: el MÁS GRANDE de estos dos (eso hace max()):
+   - todo el ancho de la pantalla (100%), o
+   - lo que hace falta para cubrir todo el alto: 100vh × 1.539
+     (1.539 = 1556 / 1011, la proporción de la imagen).
+   Así siempre cubre la pantalla entera; lo que sobra se recorta.
+   Está centrado: left/top 50% y transform lo mueve la mitad de su tamaño. */
 .tablero {
-    position: relative;
-    width: min(85%, calc((100vh - 16rem) * 1.539));
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+    width: max(100%, calc(100vh * 1.539));
     aspect-ratio: 1556 / 1011;
     background-image: url("assets/img/fondo-ajedrez.jpg");
     background-size: 100% 100%;
@@ -834,8 +850,41 @@ h2 {
         grid-template-columns: repeat(3, 1fr);
     }
 
+}
+
+/* PANTALLA MÁS ESTRECHA QUE LA IMAGEN (móvil o tablet, ventana casi
+   cuadrada): para cubrirla, el tablero tendría que recortarse por los
+   LADOS y no se verían las torres ni los caballos. Aquí el tablero
+   va a todo el ancho, centrado en la pantalla (sin recortar), y arriba
+   y abajo se ve el color de fondo.
+   max-aspect-ratio: 1556/1011 = "si la pantalla es igual o más
+   estrecha que la imagen del ajedrez". */
+@media screen and (max-aspect-ratio: 1556/1011) {
     .tablero {
-        width: min(100%, calc((100vh - 16rem) * 1.539));
+        width: 100%;
+    }
+}
+
+/* PANTALLA MUY BAJITA (móvil en horizontal): textos del ajedrez más
+   pequeños para que no tapen las piezas */
+@media screen and (max-height: 500px) {
+    #ajedrez-juego {
+        padding-top: 0.6rem;
+        gap: 0.4rem;
+    }
+
+    #ajedrez-juego > .navegacion-minijuego > .boton {
+        padding: 0.3rem 0.8rem;
+        font-size: 0.8rem;
+    }
+
+    #ajedrez-juego > .ronda {
+        font-size: 1rem;
+    }
+
+    #ajedrez-juego > .estado-juego {
+        padding: 0.3rem 0.8rem;
+        font-size: 0.85rem;
     }
 }
 
