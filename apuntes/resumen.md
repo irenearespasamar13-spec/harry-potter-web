@@ -291,7 +291,7 @@ Autorizado por Irene el 07/11/2026 para la web de Harry Potter. Todo lo que no e
 | `:hover` | Efecto al pasar el ratón por botones y tarjetas |
 | `cursor: pointer` | Indicar que algo se puede pulsar |
 | `min-height`, unidad `vh` y `box-sizing: border-box` | Que cada pantalla ocupe exactamente el alto de la ventana. Añadido en la fase 2 (aprobado) |
-| `window.scrollTo(0, 0)` | Volver arriba al cambiar de pantalla (si no, en el móvil la pantalla nueva sale a mitad). **Añadido en la fase 3, pendiente del OK de Irene** |
+| `window.scrollTo(0, 0)` | Volver arriba al cambiar de pantalla (si no, en el móvil la pantalla nueva sale a mitad). Añadido en la fase 3 (aprobado) |
 
 ### 5.2 Alternativas con lo dado (aprobadas)
 - **Nombre del niño**: se pide con `prompt()`.

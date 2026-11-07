@@ -236,7 +236,7 @@ function escucharNavegacion(){
    3. PANTALLAS
    --------------------------------------------------------- */
 
-/* ===== 1.1 LA ALACENA (diseno/1-inicio.png) ===== */
+/* ===== Pantalla 1.1 · LA ALACENA (diseno/1-inicio.png) ===== */
 function pintarAlacena(){
     cambiarPantalla(`
         <section id="alacena" class="pantalla alacena">
@@ -255,7 +255,7 @@ function pintarAlacena(){
     });
 }
 
-/* ===== 1.2 ¿CÓMO TE LLAMAS? =====
+/* ===== Pantalla 1.2 · ¿CÓMO TE LLAMAS? =====
    "aviso" es un mensaje que sale si el niño no escribe su nombre */
 function pintarNombre(aviso){
     // el botón "Seguir sin nombre" solo aparece si hay aviso
@@ -306,7 +306,7 @@ function pedirNombre(){
     }
 }
 
-/* ===== 1.3 LA CARTA DE HOGWARTS ===== */
+/* ===== Pantalla 1.3 · LA CARTA DE HOGWARTS ===== */
 function pintarCarta(){
     cambiarPantalla(`
         <section id="carta" class="pantalla alacena">
@@ -326,7 +326,7 @@ function pintarCarta(){
     });
 }
 
-/* ===== 1.4 GRAN COMEDOR: LAS CUATRO CASAS ===== */
+/* ===== Pantalla 1.4 · GRAN COMEDOR: LAS CUATRO CASAS ===== */
 function pintarCasas(){
     cambiarPantalla(`
         <section id="casas" class="pantalla comedor neutro">
@@ -366,7 +366,7 @@ function pintarCasas(){
 }
 
 
-/* ===== 2. TEST DEL SOMBRERO (diseno/2-test-seleccion-casa.png) ===== */
+/* ===== Pantalla 2 · TEST DEL SOMBRERO (diseno/2-test-seleccion-casa.png) ===== */
 
 // pone a cero el test y enseña la primera pregunta
 function empezarTest(){
@@ -548,7 +548,7 @@ function calcularCasa(){
     console.log(`El sombrero ha elegido: ${casa}`);
 }
 
-/* ===== 2.2 RESULTADO: ENHORABUENA, TU CASA ES... ===== */
+/* ===== Pantalla 2.2 · RESULTADO: ENHORABUENA, TU CASA ES... ===== */
 function pintarResultado(){
     let texto = "";
     switch(casa){
@@ -589,7 +589,7 @@ function pintarResultado(){
 }
 
 
-/* ===== 3. TORNEO DE LA COPA (diseno/3-copa-de-la-casa.png) ===== */
+/* ===== Pantalla 3 · TORNEO DE LA COPA (diseno/3-copa-de-la-casa.png) ===== */
 
 // HTML de un marcador. La casa del niño lleva la etiqueta "Tu casa"
 let tarjetaMarcador = (casaTarjeta) => `
@@ -631,7 +631,7 @@ function pintarTorneo(){
 }
 
 
-/* ===== 4. SALA DE LOS MINIJUEGOS (diseno/4-sala-minijuegos.png) ===== */
+/* ===== Pantalla 4 · SALA DE LOS MINIJUEGOS (diseno/4-sala-minijuegos.png) ===== */
 
 // HTML de la tarjeta de un minijuego
 let tarjetaMinijuego = (id, imagen, titulo, texto, superado) => `
@@ -693,7 +693,7 @@ function pintarEnhorabuena(juego, texto, conPuntos){
 }
 
 
-/* ===== 6. FINAL (diseno/6-final.png) ===== */
+/* ===== Pantalla 6 · FINAL (diseno/6-final.png) ===== */
 
 // 6.1 Gran Comedor neutro: todavía no se sabe quién gana
 function pintarFinalEspera(){
@@ -808,7 +808,7 @@ function esperar(milisegundos, accion){
 }
 
 
-/* ===== 5.1 POCIONES ===== */
+/* ===== Pantalla 5.1 · POCIONES ===== */
 
 function pintarPocionesExplicacion(){
     cambiarPantalla(`
@@ -1004,7 +1004,7 @@ function echarIngrediente(ingrediente){
 }
 
 
-/* ===== 5.2 LLAVES VOLADORAS ===== */
+/* ===== Pantalla 5.2 · LLAVES VOLADORAS ===== */
 
 function pintarLlavesExplicacion(){
     cambiarPantalla(`
@@ -1162,7 +1162,7 @@ function empezarLlaves(){
 }
 
 
-/* ===== 5.3 AJEDREZ MÁGICO ===== */
+/* ===== Pantalla 5.3 · AJEDREZ MÁGICO ===== */
 
 function pintarAjedrezExplicacion(){
     cambiarPantalla(`

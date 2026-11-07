@@ -212,7 +212,7 @@ h2 {
 
 /* ---------- 6. GRAN COMEDOR: FONDOS DE CADA CASA ---------- */
 
-/* Si todavía no está la imagen de la casa, se ve su color de fondo */
+/* Si falta la imagen de la casa, se ve su color de fondo */
 .neutro {
     background-color: #460643;
     background-image: url("assets/img/fondo-gran-comedor.jpg");
@@ -361,7 +361,7 @@ h2 {
     border-color: #F4A549;
 }
 
-/* la respuesta elegida (la clase la pondrá JavaScript en la fase 3) */
+/* la respuesta elegida (la clase la pone JavaScript con un ternario) */
 .seleccionada {
     border-color: #FFD27F;
     background-color: #4A6182;

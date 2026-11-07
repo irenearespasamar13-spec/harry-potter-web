@@ -9,8 +9,9 @@ El código ya las busca con estos nombres. Si subes una con otra extensión
 imágenes → *Commit changes*. Si las subes a `main`, avísame y las traigo.
 
 Para iconos, escudos, piezas, llaves e ingredientes usa **PNG con fondo
-transparente**. Para los fondos, JPG de unos 1920 px de ancho es suficiente:
-pesarán menos que los de 6300 px y la web cargará más rápido en el móvil.
+transparente**. Para los fondos, JPG de unos **2560 px de ancho**: se ven nítidos
+incluso en pantallas grandes y pesan poco (los fondos que ya estaban se han
+reducido de 6300 a 2560 px: de 1,4 MB a unos 220 KB cada uno).
 
 ## ✅ Ya están
 
