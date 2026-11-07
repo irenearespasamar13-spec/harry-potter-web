@@ -269,3 +269,36 @@ Si hace falta algo de esto, hay que avisar y buscar alternativa con lo visto.
 3. Escuchar eventos o pedir datos (`prompt`).
 4. Condicionales / bucles.
 5. Mostrar el resultado (`alert`, `console.log`, `innerHTML`/`textContent`).
+
+---
+
+## 5. Ampliación autorizada para este proyecto
+
+Autorizado por Irene el 07/11/2026 para la web de Harry Potter. Todo lo que no esté en esta sección ni en las anteriores sigue sin poder usarse.
+
+### 5.1 HTML y CSS básico (de primer curso)
+| Qué | Para qué |
+|---|---|
+| `<img>` con `src` y `alt` | Escudos, sombrero, respuestas del test, ingredientes, llaves, piezas |
+| `<h2>`, `<h3>` | Jerarquía de títulos (accesibilidad) |
+| `<link rel="stylesheet">` | Enlazar `style.css` y las fuentes de Google Fonts |
+| `background-image` (y `background-size`, `background-position`) | Fondos ilustrados de cada pantalla |
+| `font-family`, `font-size`, `font-weight`, `line-height`, `letter-spacing`, `text-transform` | Tipografías del Figma |
+| `text-align` | Alinear textos |
+| `margin`, `padding` | Espacios |
+| `border` | Bordes del campo del nombre y líneas del test |
+| Propiedades de Flexbox y Grid (`justify-content`, `align-items`, `flex-direction`, `gap`…) | Centrar y ordenar elementos |
+| `:hover` | Efecto al pasar el ratón por botones y tarjetas |
+| `cursor: pointer` | Indicar que algo se puede pulsar |
+
+### 5.2 Alternativas con lo dado (aprobadas)
+- **Nombre del niño**: se pide con `prompt()`.
+- **Cambiar de pantalla**: cada pantalla es una función que devuelve su HTML en una plantilla literal y se pinta con `innerHTML`. El color de la casa va dentro de la plantilla como clase: `class="comedor ${casa}"`.
+- **Puntos de las otras casas**: suben una cantidad fija cada vez que el niño vuelve al marcador (sin `setInterval`). La casa del niño siempre gana.
+- **Final**: botón "Descubrir la casa ganadora" en lugar de esperar 3 segundos (sin `setTimeout`).
+
+### 5.3 Conceptos nuevos solo para los 3 minijuegos
+Autorizado usar conocimientos no dados para que los minijuegos funcionen **tal cual el Figma**, con la condición de explicarlos bien en el código y al entregarlos:
+- **Pociones**: arrastrar los ingredientes al caldero.
+- **Llaves voladoras**: llaves que vuelan por la pantalla (animación).
+- **Ajedrez mágico**: piezas que se iluminan al azar, una más por ronda, durante 8 rondas (temporizadores y números aleatorios).
