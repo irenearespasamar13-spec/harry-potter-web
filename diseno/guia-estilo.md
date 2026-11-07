@@ -136,7 +136,6 @@ Notas:
 ### Cabecera del test
 - El sombrero seleccionador centrado entre **dos líneas horizontales finas
   naranjas**, encima de la pregunta.
-
 ---
 
 ## 5. Estilo general

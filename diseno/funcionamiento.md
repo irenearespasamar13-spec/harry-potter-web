@@ -74,7 +74,7 @@ Contenido de la pantalla (Gran Comedor con colores neutros: morado, rosa y naran
   - **GRIFFINDOR**: Es la casa de los valientes, atrevidos y decididos. Sus
     miembros destacan por su coraje y su nobleza, incluso cuando tienen miedo.
   - **RAVENCLAW**: Es la casa de los inteligentes, creativos y curiosos. Sus
-    miembros destacan por su sabiduría y originalidad. Siempre buscan aprender
+      miembros destacan por su sabiduría y originalidad. Siempre buscan aprender
     cosas nuevas.
   - **SLITHERIN**: Es la casa de los ambiciosos, astutos y determinados. Sus
     miembros son ingeniosos y estratégicos. Valoran el liderazgo y la
@@ -194,7 +194,7 @@ Contenido de la pantalla:
 - Texto: "Las 4 casas competirán en diferentes pruebas y ganarán puntos cuando
   ganen. Tu misión es conseguir puntos en diferentes minijuegos para ayudar a
   tu casa a ganar la copa."
-- Cuatro marcadores (escudo + nombre + puntos, empiezan en **0**):
+  - Cuatro marcadores (escudo + nombre + puntos, empiezan en **0**):
   GRIFFINDOR, RAVENCLAW, SLITHERIN, HUFLEPUFF.
 - Botón: **Jugar** → lleva a la sala de los minijuegos (pantalla 4).
 
