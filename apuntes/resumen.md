@@ -290,7 +290,8 @@ Autorizado por Irene el 07/11/2026 para la web de Harry Potter. Todo lo que no e
 | Propiedades de Flexbox y Grid (`justify-content`, `align-items`, `flex-direction`, `gap`…) | Centrar y ordenar elementos |
 | `:hover` | Efecto al pasar el ratón por botones y tarjetas |
 | `cursor: pointer` | Indicar que algo se puede pulsar |
-| `min-height`, unidad `vh` y `box-sizing: border-box` | Que cada pantalla ocupe exactamente el alto de la ventana. **Añadido en la fase 2, pendiente del OK de Irene** |
+| `min-height`, unidad `vh` y `box-sizing: border-box` | Que cada pantalla ocupe exactamente el alto de la ventana. Añadido en la fase 2 (aprobado) |
+| `window.scrollTo(0, 0)` | Volver arriba al cambiar de pantalla (si no, en el móvil la pantalla nueva sale a mitad). **Añadido en la fase 3, pendiente del OK de Irene** |
 
 ### 5.2 Alternativas con lo dado (aprobadas)
 - **Nombre del niño**: se pide con `prompt()`.
@@ -303,4 +304,5 @@ Autorizado usar conocimientos no dados para que los minijuegos funcionen **tal c
 - **Pociones**: arrastrar los ingredientes al caldero.
 - **Llaves voladoras**: llaves que vuelan por la pantalla (animación).
 - **Ajedrez mágico**: piezas que se iluminan al azar, una más por ronda, durante 8 rondas (temporizadores y números aleatorios).
+- En el JS de los juegos: `setTimeout`, `requestAnimationFrame`, `Math.random`/`Math.floor`, arrays y objetos, `classList`, `style.transform`, eventos `pointerdown`/`pointermove`/`pointerup`, `getBoundingClientRect`, `dataset` y el atributo `aria-live` (accesibilidad). Todo explicado en la parte 4 de `code.js`.
 - En el CSS de los juegos: `position` (relative/absolute) con `top`/`left`/`bottom`, `aspect-ratio` y `filter: drop-shadow()` para el brillo.

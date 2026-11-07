@@ -577,6 +577,23 @@ h2 {
     filter: drop-shadow(0 0 10px #FFD27F);
 }
 
+/* touch-action: none evita que, al arrastrar con el dedo, se mueva la página */
+.ingrediente-arrastrable {
+    touch-action: none;
+}
+
+/* mientras se arrastra: por encima de todo y con brillo */
+.arrastrando {
+    z-index: 2;
+    cursor: grabbing;
+    filter: drop-shadow(0 0 12px #FFD27F);
+}
+
+/* ingrediente ya echado al caldero */
+.dentro-del-caldero {
+    display: none;
+}
+
 /* sitio de cada ingrediente (como en el Figma) */
 .lugar-escamas    { top: 5%;  left: 15%; }
 .lugar-cola       { top: 0%;  left: 55%; }
@@ -590,22 +607,40 @@ h2 {
     bottom: 0;
     left: 40%;
     width: 20%;
+    min-height: 8rem;
+    display: flex;
+    align-items: flex-end;
+    justify-content: center;
+}
+
+/* el caldero brilla cuando un ingrediente está encima */
+.caldero-activo {
+    filter: drop-shadow(0 0 16px #FFD27F);
+}
+
+/* ¡BOOM! */
+.explosion {
+    filter: drop-shadow(0 0 20px #FF5A36) drop-shadow(0 0 40px #FF5A36);
 }
 
 .caldero > img {
     width: 100%;
 }
 
-/* --- LLAVES: de momento en rejilla; en la fase 3 volarán --- */
+/* --- LLAVES: vuelan dentro del "cielo" ---
+   Todas empiezan arriba a la izquierda (left: 0; top: 0) y JS las
+   mueve con transform: translate(x, y) en cada fotograma */
 .cielo-llaves {
+    position: relative;
     width: 100%;
-    display: grid;
-    grid-template-columns: repeat(4, 1fr);
-    gap: 2rem;
-    justify-items: center;
+    height: 65vh;
+    overflow: hidden;
 }
 
 .llave {
+    position: absolute;
+    left: 0;
+    top: 0;
     background-color: transparent;
     border: none;
     padding: 0;
@@ -619,6 +654,11 @@ h2 {
 
 .llave:hover {
     filter: drop-shadow(0 0 8px #FFD27F);
+}
+
+/* la llave vieja cuando la atrapas */
+.llave.atrapada {
+    filter: drop-shadow(0 0 8px #FFD27F) drop-shadow(0 0 24px #F4A549);
 }
 
 /* --- AJEDREZ: las piezas encima del fondo, cada una en su sitio --- */
@@ -661,8 +701,8 @@ h2 {
     filter: drop-shadow(0 0 10px #FFD27F);
 }
 
-/* pieza iluminada (la clase la pondrá JavaScript en la fase 3) */
-.iluminada {
+/* pieza iluminada (la pone JavaScript). ".pieza.iluminada" para que gane a ".pieza:hover" */
+.pieza.iluminada {
     filter: drop-shadow(0 0 6px #FFD27F) drop-shadow(0 0 22px #F4A549);
 }
 
@@ -677,7 +717,54 @@ h2 {
 .pieza-torre-negra    { left: 84.96%; top: 32.84%; width: 15.04%; }
 
 
-/* ---------- 13. FINAL ---------- */
+/* ---------- 13. TEXTOS QUE AÑADE JAVASCRIPT ---------- */
+
+/* avisos ("Elige una respuesta antes de seguir") */
+.aviso {
+    font-weight: 600;
+    color: #FFD27F;
+    text-align: center;
+}
+
+/* en la caja naranja del nombre, el aviso va oscuro para que se lea */
+.caja-nombre > .aviso {
+    color: #5C1A00;
+    text-align: left;
+}
+
+.contador-preguntas {
+    font-size: 0.85rem;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: #F4A549;
+}
+
+/* etiqueta "Tu casa" en el marcador */
+.tu-casa {
+    background-color: #F4A549;
+    color: #111111;
+    font-size: 0.75rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    padding: 0.2rem 0.6rem;
+}
+
+/* mensajes de los minijuegos ("¡Tu turno!", "¡Esa no es!") */
+.estado-juego {
+    background-color: #0F141D;
+    padding: 0.6rem 1.2rem;
+    font-weight: 600;
+    text-align: center;
+}
+
+.mensaje-final {
+    font-size: 1.1rem;
+    text-align: center;
+}
+
+
+/* ---------- 14. FINAL ---------- */
 
 .final > h2 {
     font-family: "Old Standard TT", Georgia, serif;
@@ -691,7 +778,7 @@ h2 {
 
 
 /* =========================================================
-   14. RESPONSIVE
+   15. RESPONSIVE
    ========================================================= */
 
 /* TABLET: 2 tarjetas por fila y cajas más anchas */
@@ -802,10 +889,6 @@ h2 {
 
     .ingrediente-arrastrable {
         width: 4rem;
-    }
-
-    .cielo-llaves {
-        grid-template-columns: repeat(3, 1fr);
     }
 
     .llave > img {
