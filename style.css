@@ -212,7 +212,8 @@ h2 {
 
 /* ---------- 6. GRAN COMEDOR: FONDOS DE CADA CASA ---------- */
 
-/* Si falta la imagen de la casa, se ve su color de fondo */
+/* Si falta la imagen de la casa, se ve su color de fondo.
+   Las 4 imágenes de las casas están marcadas con FALTA IMAGEN */
 .neutro {
     background-color: #460643;
     background-image: url("assets/img/fondo-gran-comedor.jpg");
@@ -220,22 +221,22 @@ h2 {
 
 .gryffindor {
     background-color: #5E0000;
-    background-image: url("assets/img/fondo-gran-comedor-gryffindor.jpg");
+    background-image: url("assets/img/fondo-gran-comedor-gryffindor.jpg");   /* FALTA IMAGEN */
 }
 
 .slytherin {
     background-color: #001E0F;
-    background-image: url("assets/img/fondo-gran-comedor-slytherin.jpg");
+    background-image: url("assets/img/fondo-gran-comedor-slytherin.jpg");   /* FALTA IMAGEN */
 }
 
 .ravenclaw {
     background-color: #001944;
-    background-image: url("assets/img/fondo-gran-comedor-ravenclaw.jpg");
+    background-image: url("assets/img/fondo-gran-comedor-ravenclaw.jpg");   /* FALTA IMAGEN */
 }
 
 .hufflepuff {
     background-color: #2A1B10;
-    background-image: url("assets/img/fondo-gran-comedor-hufflepuff.jpg");
+    background-image: url("assets/img/fondo-gran-comedor-hufflepuff.jpg");   /* FALTA IMAGEN */
 }
 
 /* cabecera de las pantallas del Gran Comedor */
@@ -457,7 +458,7 @@ h2 {
 
 .llaves {
     background-color: #4E4A55;
-    background-image: url("assets/img/fondo-llaves.jpg");
+    background-image: url("assets/img/fondo-llaves.jpg");   /* FALTA IMAGEN */
 }
 
 .ajedrez {

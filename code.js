@@ -19,6 +19,50 @@
    ========================================================= */
 
 
+/* =========================================================
+   📷 IMÁGENES QUE FALTAN  (busca "FALTA IMAGEN" con Ctrl+F)
+
+   Guarda cada imagen en la carpeta assets/img/ con EXACTAMENTE
+   este nombre. Si la tuya tiene otro nombre o extensión
+   (.jpg, .webp...), cambia la ruta en la línea marcada con
+   "FALTA IMAGEN" (aquí en code.js o en style.css).
+
+   FONDOS DEL GRAN COMEDOR (van en style.css, sección 6):
+     assets/img/fondo-gran-comedor-gryffindor.jpg
+     assets/img/fondo-gran-comedor-slytherin.jpg
+     assets/img/fondo-gran-comedor-ravenclaw.jpg
+     assets/img/fondo-gran-comedor-hufflepuff.jpg
+
+   TEST DEL SOMBRERO (función cargarPregunta):
+     assets/img/respuesta-varita.png      assets/img/respuesta-libro.png
+     assets/img/respuesta-giratiempo.png  assets/img/respuesta-capa.png
+     assets/img/respuesta-manos.png       assets/img/respuesta-corazon.png
+     assets/img/respuesta-escudo.png      assets/img/respuesta-regalo.png
+     assets/img/respuesta-buho.png        assets/img/respuesta-gato.png
+     assets/img/respuesta-fenix.png       assets/img/respuesta-tejon.png
+     assets/img/respuesta-copa.png        assets/img/respuesta-estrella.png
+     assets/img/respuesta-snitch.png      assets/img/respuesta-dados.png
+
+   POCIONES (pintarPocionesExplicacion y pintarPocionesJuego):
+     assets/img/caldero.png
+     assets/img/ingrediente-mandragora.png
+     assets/img/ingrediente-ojos-arana.png
+     assets/img/ingrediente-pelo-unicornio.png
+     assets/img/ingrediente-baba-sapo.png
+     assets/img/ingrediente-escamas-dragon.png
+     assets/img/ingrediente-cola-escorpion.png
+
+   LLAVES VOLADORAS (pintarSala, pintarLlavesExplicacion, empezarLlaves
+   y style.css sección 11):
+     assets/img/fondo-llaves.jpg
+     assets/img/llave-normal.png
+     assets/img/llave-vieja.png
+
+   Consejo: iconos, ingredientes y llaves en PNG con fondo
+   transparente; fondos en JPG de unos 2560 px de ancho.
+   ========================================================= */
+
+
 /* ---------------------------------------------------------
    1. VARIABLES
    --------------------------------------------------------- */
@@ -388,10 +432,10 @@ function cargarPregunta(){
             texto2 = "Poder leer la mente y saber la respuesta a cualquier pregunta.";
             texto3 = "Curar a los enfermos y conseguir que nadie se sienta solo.";
             texto4 = "Volverte invisible para hacer travesuras y salirte con la tuya.";
-            imagen1 = "respuesta-varita";
-            imagen2 = "respuesta-libro";
-            imagen3 = "respuesta-giratiempo";
-            imagen4 = "respuesta-capa";
+            imagen1 = "respuesta-varita";       // FALTA IMAGEN: assets/img/respuesta-varita.png
+            imagen2 = "respuesta-libro";        // FALTA IMAGEN: assets/img/respuesta-libro.png
+            imagen3 = "respuesta-giratiempo";   // FALTA IMAGEN: assets/img/respuesta-giratiempo.png
+            imagen4 = "respuesta-capa";         // FALTA IMAGEN: assets/img/respuesta-capa.png
             ordenCasas = "GRHS";
             break;
         case 2:
@@ -400,10 +444,10 @@ function cargarPregunta(){
             texto2 = "Defenderlo si alguien intenta molestarle.";
             texto3 = "Guardar sus secretos y ayudarle a conseguir lo que quiere.";
             texto4 = "Ayudarle a hacer deberes o enseñarle cosas divertidas.";
-            imagen1 = "respuesta-manos";
-            imagen2 = "respuesta-corazon";
-            imagen3 = "respuesta-escudo";
-            imagen4 = "respuesta-regalo";
+            imagen1 = "respuesta-manos";        // FALTA IMAGEN: assets/img/respuesta-manos.png
+            imagen2 = "respuesta-corazon";      // FALTA IMAGEN: assets/img/respuesta-corazon.png
+            imagen3 = "respuesta-escudo";       // FALTA IMAGEN: assets/img/respuesta-escudo.png
+            imagen4 = "respuesta-regalo";       // FALTA IMAGEN: assets/img/respuesta-regalo.png
             ordenCasas = "HGSR";
             break;
         case 3:
@@ -412,10 +456,10 @@ function cargarPregunta(){
             texto2 = "Un gato misterioso y astuto que solo te obedezca a ti.";
             texto3 = "Un ave fénix valiente que te proteja.";
             texto4 = "Cualquier animal fiel que siempre quiera jugar contigo.";
-            imagen1 = "respuesta-buho";
-            imagen2 = "respuesta-gato";
-            imagen3 = "respuesta-fenix";
-            imagen4 = "respuesta-tejon";
+            imagen1 = "respuesta-buho";         // FALTA IMAGEN: assets/img/respuesta-buho.png
+            imagen2 = "respuesta-gato";         // FALTA IMAGEN: assets/img/respuesta-gato.png
+            imagen3 = "respuesta-fenix";        // FALTA IMAGEN: assets/img/respuesta-fenix.png
+            imagen4 = "respuesta-tejon";        // FALTA IMAGEN: assets/img/respuesta-tejon.png
             ordenCasas = "RSGH";
             break;
         default:
@@ -424,16 +468,18 @@ function cargarPregunta(){
             texto2 = "Jugando en equipo, para que todos se diviertan.";
             texto3 = "Pensando en la mejor estrategia antes de jugar.";
             texto4 = "Haciendo lo que sea necesario para ganar.";
-            imagen1 = "respuesta-copa";
-            imagen2 = "respuesta-estrella";
-            imagen3 = "respuesta-snitch";
-            imagen4 = "respuesta-dados";
+            imagen1 = "respuesta-copa";         // FALTA IMAGEN: assets/img/respuesta-copa.png
+            imagen2 = "respuesta-estrella";     // FALTA IMAGEN: assets/img/respuesta-estrella.png
+            imagen3 = "respuesta-snitch";       // FALTA IMAGEN: assets/img/respuesta-snitch.png
+            imagen4 = "respuesta-dados";        // FALTA IMAGEN: assets/img/respuesta-dados.png
             ordenCasas = "GHRS";
             break;
     }
 }
 
 // HTML de una tarjeta de respuesta. Si es la elegida, lleva la clase "seleccionada"
+// La ruta se forma así: "assets/img/" + imagen1 (por ejemplo "respuesta-varita") + ".png"
+// Si tus imágenes del test no son .png, cambia ".png" aquí abajo   ← FALTA IMAGEN
 let tarjetaRespuesta = (numero, imagen, texto) => `
     <button id="respuesta-${numero}" class="tarjeta-respuesta ${(respuestaElegida == numero) ? "seleccionada" : ""}">
         <img src="assets/img/${imagen}.png" alt="">
@@ -643,6 +689,7 @@ let tarjetaMinijuego = (id, imagen, titulo, texto, superado) => `
     </div>`;
 
 function pintarSala(){
+    // FALTA IMAGEN: la tarjeta de las llaves usa assets/img/fondo-llaves.jpg
     cambiarPantalla(`
         <section id="sala" class="pantalla comedor ${casa}">
             <header>
@@ -811,6 +858,9 @@ function esperar(milisegundos, accion){
 /* ===== Pantalla 5.1 · POCIONES ===== */
 
 function pintarPocionesExplicacion(){
+    // FALTA IMAGEN: los 6 ingredientes de esta pantalla
+    // (assets/img/ingrediente-mandragora.png, ingrediente-ojos-arana.png, ingrediente-pelo-unicornio.png,
+    //  ingrediente-baba-sapo.png, ingrediente-escamas-dragon.png, ingrediente-cola-escorpion.png)
     cambiarPantalla(`
         <section id="pociones-explicacion" class="pantalla minijuego pociones">
             ${navegacionMinijuego()}
@@ -859,6 +909,7 @@ function pintarPocionesExplicacion(){
    data-orden (1 = el primero que hay que echar).
    Están desordenados alrededor del caldero con las clases lugar-... */
 function pintarPocionesJuego(){
+    // FALTA IMAGEN: los 6 ingredientes (los mismos de la explicación) y assets/img/caldero.png
     cambiarPantalla(`
         <section id="pociones-juego" class="pantalla minijuego pociones">
             ${navegacionMinijuego()}
@@ -1007,6 +1058,7 @@ function echarIngrediente(ingrediente){
 /* ===== Pantalla 5.2 · LLAVES VOLADORAS ===== */
 
 function pintarLlavesExplicacion(){
+    // FALTA IMAGEN: assets/img/llave-normal.png y assets/img/llave-vieja.png
     cambiarPantalla(`
         <section id="llaves-explicacion" class="pantalla minijuego llaves">
             ${navegacionMinijuego()}
@@ -1060,6 +1112,7 @@ function empezarLlaves(){
     // 2. Pinto las 12 llaves con un bucle for (esto sí es del temario)
     let html = "";
     for(let i = 0; i < totalLlaves; i++){
+        // FALTA IMAGEN: assets/img/llave-vieja.png y assets/img/llave-normal.png
         if(i == posicionVieja){
             html += `<button class="llave llave-vieja"><img src="assets/img/llave-vieja.png" alt="Llave vieja del castillo"></button>`;
         }else{
