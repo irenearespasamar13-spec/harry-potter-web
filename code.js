@@ -968,6 +968,9 @@ function prepararArrastre(ingrediente){
         if(pocionTerminada){
             return;
         }
+        // le digo al navegador que no haga su propio arrastre de imagen
+        // (si lo hace, cancela el nuestro y el caldero no se entera)
+        evento.preventDefault();
         arrastrando = true;
         inicioX = evento.clientX;
         inicioY = evento.clientY;
@@ -1089,6 +1092,11 @@ function pintarLlavesExplicacion(){
 
 const totalLlaves = 12;
 
+/* VELOCIDAD DE LAS LLAVES: cuánto del ancho de la pantalla recorren
+   en un segundo (0.05 = un 5 %). Para que vayan más lentas, bájalo
+   (por ejemplo 0.03); para que vayan más rápidas, súbelo. */
+const velocidadLlaves = 0.05;
+
 function pintarLlavesJuego(){
     cambiarPantalla(`
         <section id="llaves-juego" class="pantalla minijuego llaves">
@@ -1126,8 +1134,9 @@ function empezarLlaves(){
     let elementos = document.querySelectorAll(".llave");
     let llaves = [];
 
-    // velocidad según el ancho de la pantalla (en el móvil vuelan más despacio)
-    let velocidad = cielo.clientWidth / 450;
+    // velocidad en píxeles POR SEGUNDO, según el ancho de la pantalla
+    // (en una pantalla de 1500 px: unos 75 px por segundo como mucho)
+    let velocidad = cielo.clientWidth * velocidadLlaves;
     // si el sistema pide "reducir movimiento", vuelan mucho más despacio (accesibilidad)
     if(window.matchMedia("(prefers-reduced-motion: reduce)").matches){
         velocidad = velocidad * 0.3;
@@ -1149,43 +1158,69 @@ function empezarLlaves(){
             vy: signoY * (0.5 + Math.random() * 0.5) * velocidad
         });
 
-        // al pulsar una llave
-        elementos[i].addEventListener("click", () => {
-            if(atrapada){
-                return;
-            }
-            if(elementos[i].classList.contains("llave-vieja")){
-                // ¡la vieja! paro las llaves (partida++ detiene la animación) y gano
-                atrapada = true;
-                partida++;
-                elementos[i].classList.add("atrapada");
-                estado.textContent = "¡La tienes! Has atrapado la llave vieja.";
-                esperar(1200, () => {
-                    let conPuntos = ganarMinijuego("llaves");
-                    pintarEnhorabuena("llaves", "Conseguiste encontrar la llave correcta. Se suman 50 puntos para tu casa.", conPuntos);
-                });
-            }else{
-                estado.textContent = "¡Esa no es! Busca la llave vieja del castillo.";
+        /* al pulsar una llave. Uso "pointerdown" (el momento de PULSAR)
+           y no "click": el click solo cuenta si pulsas y sueltas encima
+           del mismo sitio, y como la llave se mueve, a veces se perdía. */
+        elementos[i].addEventListener("pointerdown", (evento) => {
+            evento.preventDefault();
+            pulsarLlave(elementos[i]);
+        });
+        // con el teclado (Tab + Enter) sí llega un click: evento.detail == 0
+        elementos[i].addEventListener("click", (evento) => {
+            if(evento.detail == 0){
+                pulsarLlave(elementos[i]);
             }
         });
     }
 
+    // qué pasa al pulsar una llave
+    function pulsarLlave(llavePulsada){
+        if(atrapada){
+            return;
+        }
+        if(llavePulsada.classList.contains("llave-vieja")){
+            // ¡la vieja! paro las llaves (partida++ detiene la animación) y gano
+            atrapada = true;
+            partida++;
+            llavePulsada.classList.add("atrapada");
+            estado.textContent = "¡La tienes! Has atrapado la llave vieja.";
+            esperar(1200, () => {
+                let conPuntos = ganarMinijuego("llaves");
+                pintarEnhorabuena("llaves", "Conseguiste encontrar la llave correcta. Se suman 50 puntos para tu casa.", conPuntos);
+            });
+        }else{
+            estado.textContent = "¡Esa no es! Busca la llave vieja del castillo.";
+        }
+    }
+
     /* 4. La animación: en cada fotograma muevo cada llave un poco.
+       requestAnimationFrame le pasa a volar() el "tiempo" en milisegundos.
+       Con la diferencia entre un fotograma y el anterior sé cuántos
+       segundos han pasado, y muevo cada llave velocidad × segundos.
+       Así van igual de rápido en cualquier pantalla (60, 120 o 144 Hz).
        Si toca un borde, rebota (cambio el signo de su velocidad). */
     let miPartida = partida;
-    let volar = () => {
+    let tiempoAnterior = 0;
+    let volar = (tiempo) => {
         // si ya no estamos en esta pantalla (o se ha ganado), paro
         if(miPartida != partida){
             return;
         }
+        // segundos desde el fotograma anterior (como mucho 0.05, por si la pestaña estaba en segundo plano)
+        let segundos = (tiempoAnterior == 0) ? 0 : (tiempo - tiempoAnterior) / 1000;
+        if(segundos > 0.05){
+            segundos = 0.05;
+        }
+        tiempoAnterior = tiempo;
+
         let ancho = cielo.clientWidth;
         let alto = cielo.clientHeight;
 
         for(let i = 0; i < llaves.length; i++){
             let llave = llaves[i];
             let tamano = llave.elemento.offsetWidth;
-            llave.x += llave.vx;
-            llave.y += llave.vy;
+            llave.x += llave.vx * segundos;
+            llave.y += llave.vy * segundos;
 
             // rebote en los bordes
             if(llave.x < 0){
@@ -1206,7 +1241,7 @@ function empezarLlaves(){
             }
 
             // muevo la llave y la inclino un poco según hacia dónde va
-            llave.elemento.style.transform = `translate(${llave.x}px, ${llave.y}px) rotate(${llave.vx * 8}deg)`;
+            llave.elemento.style.transform = `translate(${llave.x}px, ${llave.y}px) rotate(${llave.vx * 0.15}deg)`;
         }
 
         requestAnimationFrame(volar);

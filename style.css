@@ -550,6 +550,19 @@ h2 {
    (apuntes/resumen.md, sección 5.3).
    ========================================================= */
 
+/* Las imágenes de dentro de ingredientes, llaves y piezas "no reciben el ratón"
+   (pointer-events: none). Así:
+   - el navegador no intenta arrastrar la imagen él solo (eso cancelaba
+     nuestro arrastre de los ingredientes y no llegaban al caldero);
+   - el click siempre llega al botón que las contiene. */
+.ingrediente-arrastrable > img,
+.llave > img,
+.pieza > img {
+    pointer-events: none;
+    user-select: none;
+    -webkit-user-drag: none;
+}
+
 /* --- POCIONES: ingredientes alrededor del caldero --- */
 
 /* "position: relative" convierte la mesa en la referencia:
