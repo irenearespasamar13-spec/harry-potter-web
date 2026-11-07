@@ -696,9 +696,9 @@ function pintarSala(){
                 <h2>Sala de los minijuegos</h2>
             </header>
             <div class="fila-tarjetas">
-                ${tarjetaMinijuego("jugar-pociones", "ilustracion-clase-pociones-04.jpg", "Aula de pociones", "En esta prueba tendrás que preparar una poción con el profesor Snape.", pocionesSuperado)}
-                ${tarjetaMinijuego("jugar-llaves", "fondo-llaves.jpg", "Llaves voladoras", "En esta prueba tendrás que atrapar la llave vieja del castillo.", llavesSuperado)}
-                ${tarjetaMinijuego("jugar-ajedrez", "ajedrez-completo.png", "Ajedrez mágico", "En esta prueba tendrás que derrotar al rey del ajedrez.", ajedrezSuperado)}
+                ${tarjetaMinijuego("jugar-pociones", "sala-pociones-03.jpg", "Aula de pociones", "En esta prueba tendrás que preparar una poción con el profesor Snape.", pocionesSuperado)}
+                ${tarjetaMinijuego("jugar-llaves", "llaves-voladoras.png", "Llaves voladoras", "En esta prueba tendrás que atrapar la llave vieja del castillo.", llavesSuperado)}
+                ${tarjetaMinijuego("jugar-ajedrez", "ajedrez-magico.png", "Ajedrez mágico", "En esta prueba tendrás que derrotar al rey del ajedrez.", ajedrezSuperado)}
             </div>
             <button id="boton-recuento" class="boton boton-oscuro">Volver al recuento de puntos</button>
         </section>
@@ -870,27 +870,27 @@ function pintarPocionesExplicacion(){
                 <p>Ten cuidado y memoriza bien el orden de los ingredientes antes de comenzar a jugar. El orden es el siguiente:</p>
                 <div class="fila-ingredientes">
                     <div class="ingrediente">
-                        <img src="assets/img/ingrediente-mandragora.png" alt="">
+                        <img src="assets/img/hojas-de-mandragora.png" alt="">
                         <p>1. Hojas de mandrágora.</p>
                     </div>
                     <div class="ingrediente">
-                        <img src="assets/img/ingrediente-ojos-arana.png" alt="">
+                        <img src="assets/img/ojo-de-araña.png" alt="">
                         <p>2. Ojos de araña.</p>
                     </div>
                     <div class="ingrediente">
-                        <img src="assets/img/ingrediente-pelo-unicornio.png" alt="">
+                        <img src="assets/img/pelo-de-unicornio.png" alt="">
                         <p>3. Pelo de unicornio.</p>
                     </div>
                     <div class="ingrediente">
-                        <img src="assets/img/ingrediente-baba-sapo.png" alt="">
+                        <img src="assets/img/baba-de-sapo.png" alt="">
                         <p>4. Baba de sapo.</p>
                     </div>
                     <div class="ingrediente">
-                        <img src="assets/img/ingrediente-escamas-dragon.png" alt="">
+                        <img src="assets/img/escamas-de-dragon.png" alt="">
                         <p>5. Escamas de dragón.</p>
                     </div>
                     <div class="ingrediente">
-                        <img src="assets/img/ingrediente-cola-escorpion.png" alt="">
+                        <img src="assets/img/cola-de-escorpion.png" alt="">
                         <p>6. Cola de escorpión.</p>
                     </div>
                 </div>
@@ -915,12 +915,12 @@ function pintarPocionesJuego(){
             ${navegacionMinijuego()}
             <p id="estado-pociones" class="estado-juego" aria-live="polite">Arrastra los ingredientes al caldero en el orden correcto.</p>
             <div class="mesa-pociones">
-                <button class="ingrediente-arrastrable lugar-escamas" data-orden="5"><img src="assets/img/ingrediente-escamas-dragon.png" alt="Escamas de dragón"></button>
-                <button class="ingrediente-arrastrable lugar-cola" data-orden="6"><img src="assets/img/ingrediente-cola-escorpion.png" alt="Cola de escorpión"></button>
-                <button class="ingrediente-arrastrable lugar-baba" data-orden="4"><img src="assets/img/ingrediente-baba-sapo.png" alt="Baba de sapo"></button>
-                <button class="ingrediente-arrastrable lugar-ojos" data-orden="2"><img src="assets/img/ingrediente-ojos-arana.png" alt="Ojos de araña"></button>
-                <button class="ingrediente-arrastrable lugar-mandragora" data-orden="1"><img src="assets/img/ingrediente-mandragora.png" alt="Hojas de mandrágora"></button>
-                <button class="ingrediente-arrastrable lugar-pelo" data-orden="3"><img src="assets/img/ingrediente-pelo-unicornio.png" alt="Pelo de unicornio"></button>
+                <button class="ingrediente-arrastrable lugar-escamas" data-orden="5"><img src="assets/img/escamas-de-dragon.png" alt="Escamas de dragón"></button>
+                <button class="ingrediente-arrastrable lugar-cola" data-orden="6"><img src="assets/img/cola-de-escorpion.png" alt="Cola de escorpión"></button>
+                <button class="ingrediente-arrastrable lugar-baba" data-orden="4"><img src="assets/img/baba-de-sapo.png" alt="Baba de sapo"></button>
+                <button class="ingrediente-arrastrable lugar-ojos" data-orden="2"><img src="assets/img/ojo-de-araña.png" alt="Ojos de araña"></button>
+                <button class="ingrediente-arrastrable lugar-mandragora" data-orden="1"><img src="assets/img/hojas-de-mandragora.png" alt="Hojas de mandrágora"></button>
+                <button class="ingrediente-arrastrable lugar-pelo" data-orden="3"><img src="assets/img/pelo-de-unicornio.png" alt="Pelo de unicornio"></button>
                 <div id="caldero" class="caldero">
                     <img src="assets/img/caldero.png" alt="Caldero">
                 </div>
@@ -1072,7 +1072,7 @@ function pintarLlavesExplicacion(){
                         <p>Llaves normales.</p>
                     </div>
                     <div class="ingrediente">
-                        <img src="assets/img/llave-vieja.png" alt="">
+                        <img src="assets/img/llave-antigua.png" alt="">
                         <p>Llave vieja del castillo.</p>
                     </div>
                 </div>
@@ -1114,7 +1114,7 @@ function empezarLlaves(){
     for(let i = 0; i < totalLlaves; i++){
         // FALTA IMAGEN: assets/img/llave-vieja.png y assets/img/llave-normal.png
         if(i == posicionVieja){
-            html += `<button class="llave llave-vieja"><img src="assets/img/llave-vieja.png" alt="Llave vieja del castillo"></button>`;
+            html += `<button class="llave llave-vieja"><img src="assets/img/llave-antigua.png" alt="Llave vieja del castillo"></button>`;
         }else{
             html += `<button class="llave"><img src="assets/img/llave-normal.png" alt="Llave normal"></button>`;
         }

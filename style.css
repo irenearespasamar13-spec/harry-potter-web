@@ -117,7 +117,7 @@ h2 {
 
 .alacena {
     background-color: #001848;
-    background-image: url("assets/img/ilustracion-inicio-02.jpg");
+    background-image: url("assets/img/alacena-bajo-las-escaleras.jpg");
 }
 
 /* 1.1 la alacena: título arriba a la derecha y sobre a la izquierda */
@@ -221,22 +221,22 @@ h2 {
 
 .gryffindor {
     background-color: #5E0000;
-    background-image: url("assets/img/fondo-gran-comedor-gryffindor.jpg");   /* FALTA IMAGEN */
+    background-image: url("assets/img/gran-comedor-griffindor.jpg");   /* FALTA IMAGEN */
 }
 
 .slytherin {
     background-color: #001E0F;
-    background-image: url("assets/img/fondo-gran-comedor-slytherin.jpg");   /* FALTA IMAGEN */
+    background-image: url("assets/img/gran-comedor-slitherin.jpg");   /* FALTA IMAGEN */
 }
 
 .ravenclaw {
     background-color: #001944;
-    background-image: url("assets/img/fondo-gran-comedor-ravenclaw.jpg");   /* FALTA IMAGEN */
+    background-image: url("assets/img/gran-comedor-ravenclaw.jpg");   /* FALTA IMAGEN */
 }
 
 .hufflepuff {
     background-color: #2A1B10;
-    background-image: url("assets/img/fondo-gran-comedor-hufflepuff.jpg");   /* FALTA IMAGEN */
+    background-image: url("assets/img/gran-comedor-hufflepuff.jpg");   /* FALTA IMAGEN */
 }
 
 /* cabecera de las pantallas del Gran Comedor */
@@ -453,17 +453,17 @@ h2 {
 
 .pociones {
     background-color: #01445F;
-    background-image: url("assets/img/ilustracion-clase-pociones-04.jpg");
+    background-image: url("assets/img/sala-pociones-03.jpg");
 }
 
 .llaves {
     background-color: #4E4A55;
-    background-image: url("assets/img/fondo-llaves.jpg");   /* FALTA IMAGEN */
+    background-image: url("assets/img/llaves-voladoras.png");   /* FALTA IMAGEN */
 }
 
 .ajedrez {
     background-color: #3A2B28;
-    background-image: url("assets/img/ajedrez-completo.png");
+    background-image: url("assets/img/ajedrez-magico.png");
 }
 
 /* botones "Sala de los minijuegos" y "Contador de puntos" arriba a la derecha */
