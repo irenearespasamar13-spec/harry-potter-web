@@ -698,12 +698,13 @@ h2 {
    Ancho: el MÁS PEQUEÑO de estos dos (eso hace min()):
    - 85% del ancho de la pantalla, o
    - lo que cabe de alto: el alto de la ventana (100vh) menos unos
-     13rem que ocupan los botones y textos de arriba, multiplicado
+     16rem que ocupan los botones y textos de arriba (con margen de
+     sobra para que no salga scroll), multiplicado
      por 1.539 (= 1556 / 1011, la proporción de la imagen).
    Así el tablero entero se ve sin hacer scroll. */
 .tablero {
     position: relative;
-    width: min(85%, calc((100vh - 13rem) * 1.539));
+    width: min(85%, calc((100vh - 16rem) * 1.539));
     aspect-ratio: 1556 / 1011;
     background-image: url("assets/img/fondo-ajedrez.jpg");
     background-size: 100% 100%;
@@ -834,7 +835,7 @@ h2 {
     }
 
     .tablero {
-        width: min(100%, calc((100vh - 13rem) * 1.539));
+        width: min(100%, calc((100vh - 16rem) * 1.539));
     }
 }
 
