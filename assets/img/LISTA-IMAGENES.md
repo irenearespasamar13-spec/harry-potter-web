@@ -23,6 +23,9 @@ pesarán menos que los de 6300 px y la web cargará más rápido en el móvil.
 | `sombrero-seleccionador.png` | Cabecera del test |
 | `escudo-gryffindor.png`, `escudo-ravenclaw.avif`, `escudo-slitherin.png`, `escudo-hufflepuff.webp` | Tarjetas de casas, resultado y marcador |
 | `ilustracion-clase-pociones-04.jpg` | Fondo del aula de pociones y su tarjeta en la sala |
+| `ajedrez-completo.png` | Explicación del ajedrez y su tarjeta en la sala (la imagen original con piezas) |
+| `fondo-ajedrez.jpg` | Fondo del juego del ajedrez (sin piezas; las zonas borrosas quedan tapadas por las piezas) |
+| `pieza-torre-blanca.png`, `pieza-caballo-blanco.png`, `pieza-alfil-blanco.png`, `pieza-rey-blanco.png`, `pieza-rey-negro.png`, `pieza-alfil-negro.png`, `pieza-caballo-negro.png`, `pieza-torre-negra.png` | Las 8 piezas del juego, recortadas de `ajedrez-completo.png`. El brillo de las piezas iluminadas se hace con CSS |
 
 ## ⬜ Faltan
 
@@ -59,13 +62,3 @@ pesarán menos que los de 6300 px y la web cargará más rápido en el móvil.
 | `ingrediente-baba-sapo.png` | 4. Baba de sapo |
 | `ingrediente-escamas-dragon.png` | 5. Escamas de dragón |
 | `ingrediente-cola-escorpion.png` | 6. Cola de escorpión |
-
-### Ajedrez mágico
-| Archivo | Uso |
-|---|---|
-| `fondo-ajedrez.jpg` | Fondo de la sala con el tablero (**sin** las piezas: van aparte para poder pulsarlas) y tarjeta en la sala de minijuegos |
-| `pieza-torre-blanca.png`, `pieza-caballo-blanco.png`, `pieza-alfil-blanco.png`, `pieza-rey-blanco.png` | Piezas blancas |
-| `pieza-rey-negro.png`, `pieza-alfil-negro.png`, `pieza-torre-negra.png`, `pieza-caballo-negro.png` | Piezas negras |
-
-El brillo dorado de las piezas iluminadas lo hago con CSS, así que no hace
-falta una versión "iluminada" de cada pieza.

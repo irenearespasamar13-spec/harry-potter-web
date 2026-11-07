@@ -51,8 +51,8 @@
         <section id="carta" class="pantalla alacena">
             <div class="carta">
                 <img src="assets/img/icono-howgarts-04.png" alt="Escudo de Hogwarts" class="escudo-hogwarts">
-                <!-- El nombre se cambia desde JS con el que escriba el niño -->
-                <p>Querido/a <em id="nombre-carta">Paula</em>,</p>
+                <!-- El saludo se cambia desde JS con el nombre que escriba el niño -->
+                <p id="saludo-carta" class="saludo-carta">Querido/a Paula,</p>
                 <p>Tenemos el placer de informarle de que ha sido admitido/a en el colegio Hogwarts de magia y hechicería.</p>
                 <p>Aquí encontrará una lista de todos los libros y equipamiento necesarios.</p>
                 <p>Atentamente,<br>Minerva McGonagall.</p>
@@ -101,7 +101,12 @@
         <!-- Pregunta 1 -->
         <section id="pregunta-1" class="pantalla test">
             <header class="cabecera-test">
-                <img src="assets/img/sombrero-seleccionador.png" alt="El sombrero seleccionador">
+                <!-- El sombrero entre dos líneas naranjas -->
+                <div class="sombrero-con-lineas">
+                    <div class="linea"></div>
+                    <img src="assets/img/sombrero-seleccionador.png" alt="El sombrero seleccionador">
+                    <div class="linea"></div>
+                </div>
                 <h2>Si tuvieras un superpoder, ¿cuál elegirías?</h2>
             </header>
             <div class="fila-tarjetas">
@@ -128,7 +133,12 @@
         <!-- Pregunta 2 -->
         <section id="pregunta-2" class="pantalla test">
             <header class="cabecera-test">
-                <img src="assets/img/sombrero-seleccionador.png" alt="El sombrero seleccionador">
+                <!-- El sombrero entre dos líneas naranjas -->
+                <div class="sombrero-con-lineas">
+                    <div class="linea"></div>
+                    <img src="assets/img/sombrero-seleccionador.png" alt="El sombrero seleccionador">
+                    <div class="linea"></div>
+                </div>
                 <h2>¿Qué es lo más importante para ser un buen amigo?</h2>
             </header>
             <div class="fila-tarjetas">
@@ -155,7 +165,12 @@
         <!-- Pregunta 3 -->
         <section id="pregunta-3" class="pantalla test">
             <header class="cabecera-test">
-                <img src="assets/img/sombrero-seleccionador.png" alt="El sombrero seleccionador">
+                <!-- El sombrero entre dos líneas naranjas -->
+                <div class="sombrero-con-lineas">
+                    <div class="linea"></div>
+                    <img src="assets/img/sombrero-seleccionador.png" alt="El sombrero seleccionador">
+                    <div class="linea"></div>
+                </div>
                 <h2>Te dan a elegir una mascota para llevar al cole, ¿cuál elegirías?</h2>
             </header>
             <div class="fila-tarjetas">
@@ -182,7 +197,12 @@
         <!-- Pregunta 4 -->
         <section id="pregunta-4" class="pantalla test">
             <header class="cabecera-test">
-                <img src="assets/img/sombrero-seleccionador.png" alt="El sombrero seleccionador">
+                <!-- El sombrero entre dos líneas naranjas -->
+                <div class="sombrero-con-lineas">
+                    <div class="linea"></div>
+                    <img src="assets/img/sombrero-seleccionador.png" alt="El sombrero seleccionador">
+                    <div class="linea"></div>
+                </div>
                 <h2>¿Cómo prefieres ganar en un juego?</h2>
             </header>
             <div class="fila-tarjetas">
@@ -278,7 +298,7 @@
                     <button class="boton">Jugar</button>
                 </div>
                 <div class="tarjeta-minijuego">
-                    <img src="assets/img/fondo-ajedrez.jpg" alt="">
+                    <img src="assets/img/ajedrez-completo.png" alt="">
                     <h3>Ajedrez mágico</h3>
                     <p>En esta prueba tendrás que derrotar al rey del ajedrez.</p>
                     <button class="boton">Jugar</button>
@@ -441,15 +461,16 @@
                 <button class="boton boton-oscuro">Contador de puntos</button>
             </nav>
             <p id="ronda" class="ronda">Ronda 1 de 8</p>
+            <!-- Las piezas se colocan encima del fondo, cada una en su sitio (style.css) -->
             <div class="tablero">
-                <button class="pieza"><img src="assets/img/pieza-torre-blanca.png" alt="Torre blanca"></button>
-                <button class="pieza"><img src="assets/img/pieza-caballo-blanco.png" alt="Caballo blanco"></button>
-                <button class="pieza"><img src="assets/img/pieza-alfil-blanco.png" alt="Alfil blanco"></button>
-                <button class="pieza"><img src="assets/img/pieza-rey-blanco.png" alt="Rey blanco"></button>
-                <button class="pieza"><img src="assets/img/pieza-rey-negro.png" alt="Rey negro"></button>
-                <button class="pieza"><img src="assets/img/pieza-alfil-negro.png" alt="Alfil negro"></button>
-                <button class="pieza"><img src="assets/img/pieza-torre-negra.png" alt="Torre negra"></button>
-                <button class="pieza"><img src="assets/img/pieza-caballo-negro.png" alt="Caballo negro"></button>
+                <button class="pieza pieza-torre-blanca"><img src="assets/img/pieza-torre-blanca.png" alt="Torre blanca"></button>
+                <button class="pieza pieza-caballo-blanco"><img src="assets/img/pieza-caballo-blanco.png" alt="Caballo blanco"></button>
+                <button class="pieza pieza-alfil-blanco"><img src="assets/img/pieza-alfil-blanco.png" alt="Alfil blanco"></button>
+                <button class="pieza pieza-rey-blanco"><img src="assets/img/pieza-rey-blanco.png" alt="Rey blanco"></button>
+                <button class="pieza pieza-rey-negro"><img src="assets/img/pieza-rey-negro.png" alt="Rey negro"></button>
+                <button class="pieza pieza-alfil-negro"><img src="assets/img/pieza-alfil-negro.png" alt="Alfil negro"></button>
+                <button class="pieza pieza-torre-negra"><img src="assets/img/pieza-torre-negra.png" alt="Torre negra"></button>
+                <button class="pieza pieza-caballo-negro"><img src="assets/img/pieza-caballo-negro.png" alt="Caballo negro"></button>
             </div>
         </section>
 
