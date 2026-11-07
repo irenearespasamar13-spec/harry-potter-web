@@ -680,6 +680,10 @@ h2 {
 #ajedrez-juego {
     background-image: none;
     justify-content: flex-start;
+    /* menos espacio arriba y entre los textos, para dejar sitio al tablero */
+    padding-top: 1.5rem;
+    padding-bottom: 1.5rem;
+    gap: 1rem;
 }
 
 .ronda {
@@ -689,10 +693,17 @@ h2 {
 }
 
 /* el tablero mantiene la proporción de la imagen (1556 x 1011)
-   para que las piezas, colocadas en %, caigan siempre en su sitio */
+   para que las piezas, colocadas en %, caigan siempre en su sitio.
+
+   Ancho: el MÁS PEQUEÑO de estos dos (eso hace min()):
+   - 85% del ancho de la pantalla, o
+   - lo que cabe de alto: el alto de la ventana (100vh) menos unos
+     13rem que ocupan los botones y textos de arriba, multiplicado
+     por 1.539 (= 1556 / 1011, la proporción de la imagen).
+   Así el tablero entero se ve sin hacer scroll. */
 .tablero {
     position: relative;
-    width: 85%;
+    width: min(85%, calc((100vh - 13rem) * 1.539));
     aspect-ratio: 1556 / 1011;
     background-image: url("assets/img/fondo-ajedrez.jpg");
     background-size: 100% 100%;
@@ -823,7 +834,7 @@ h2 {
     }
 
     .tablero {
-        width: 100%;
+        width: min(100%, calc((100vh - 13rem) * 1.539));
     }
 }
 
