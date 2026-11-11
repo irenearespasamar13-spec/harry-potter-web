@@ -2,64 +2,19 @@
    HOGWARTS · code.js
 
    Cómo funciona la web:
-   - En index.html solo hay un <main id="pantalla"> vacío.
+   - index.html solo tiene un <main id="pantalla"> vacío.
    - Cada pantalla es una función (pintarAlacena, pintarCarta...)
      que escribe su HTML dentro de ese <main> con innerHTML
-     y después escucha los clicks de sus botones.
-   - Para pasar de una pantalla a otra, solo hay que llamar
-     a la función de la siguiente.
+     y después escucha los clics de sus botones.
+   - Para pasar de una pantalla a otra se llama a la función
+     de la siguiente.
 
    Partes del archivo:
    1. Variables
    2. Funciones de ayuda
-   3. Pantallas: inicio, test, torneo, sala y final   (temario)
-   4. Minijuegos                                       (ZONA AUTORIZADA:
-      usa cosas que no hemos dado, explicadas paso a paso)
+   3. Pantallas: inicio, test, torneo, sala y final
+   4. Minijuegos: pociones, llaves voladoras y ajedrez mágico
    5. Arranque
-   ========================================================= */
-
-
-/* =========================================================
-   📷 IMÁGENES QUE FALTAN  (busca "FALTA IMAGEN" con Ctrl+F)
-
-   Guarda cada imagen en la carpeta assets/img/ con EXACTAMENTE
-   este nombre. Si la tuya tiene otro nombre o extensión
-   (.jpg, .webp...), cambia la ruta en la línea marcada con
-   "FALTA IMAGEN" (aquí en code.js o en style.css).
-
-   FONDOS DEL GRAN COMEDOR (van en style.css, sección 6):
-     assets/img/fondo-gran-comedor-gryffindor.jpg
-     assets/img/fondo-gran-comedor-slytherin.jpg
-     assets/img/fondo-gran-comedor-ravenclaw.jpg
-     assets/img/fondo-gran-comedor-hufflepuff.jpg
-
-   TEST DEL SOMBRERO (función cargarPregunta):
-     assets/img/respuesta-varita.png      assets/img/respuesta-libro.png
-     assets/img/respuesta-giratiempo.png  assets/img/respuesta-capa.png
-     assets/img/respuesta-manos.png       assets/img/respuesta-corazon.png
-     assets/img/respuesta-escudo.png      assets/img/respuesta-regalo.png
-     assets/img/respuesta-buho.png        assets/img/respuesta-gato.png
-     assets/img/respuesta-fenix.png       assets/img/respuesta-tejon.png
-     assets/img/respuesta-copa.png        assets/img/respuesta-estrella.png
-     assets/img/respuesta-snitch.png      assets/img/respuesta-dados.png
-
-   POCIONES (pintarPocionesExplicacion y pintarPocionesJuego):
-     assets/img/caldero.png
-     assets/img/ingrediente-mandragora.png
-     assets/img/ingrediente-ojos-arana.png
-     assets/img/ingrediente-pelo-unicornio.png
-     assets/img/ingrediente-baba-sapo.png
-     assets/img/ingrediente-escamas-dragon.png
-     assets/img/ingrediente-cola-escorpion.png
-
-   LLAVES VOLADORAS (pintarSala, pintarLlavesExplicacion, empezarLlaves
-   y style.css sección 11):
-     assets/img/fondo-llaves.jpg
-     assets/img/llave-normal.png
-     assets/img/llave-vieja.png
-
-   Consejo: iconos, ingredientes y llaves en PNG con fondo
-   transparente; fondos en JPG de unos 2560 px de ancho.
    ========================================================= */
 
 
@@ -280,7 +235,7 @@ function escucharNavegacion(){
    3. PANTALLAS
    --------------------------------------------------------- */
 
-/* ===== Pantalla 1.1 · LA ALACENA (diseno/1-inicio.png) ===== */
+/* ===== Pantalla 1.1 · LA ALACENA ===== */
 function pintarAlacena(){
     cambiarPantalla(`
         <section id="alacena" class="pantalla alacena">
@@ -300,16 +255,12 @@ function pintarAlacena(){
 }
 
 /* ===== Pantalla 1.2 · ¿CÓMO TE LLAMAS? =====
-   El niño escribe su nombre directamente en el recuadro naranja
-   (cambio pedido por la profesora: antes salía una ventana con prompt).
-
-   Uso cosas que no hemos dado (autorizadas en apuntes/resumen.md, 5.4):
-   · <input type="text">: un campo para escribir.
-   · <label for="...">: el texto que "nombra" el campo. Si pulsas en
-     él, el cursor salta al campo (y ayuda a los lectores de pantalla).
-   · campo.value: el texto que hay escrito dentro del campo.
+   El niño escribe su nombre en el recuadro naranja.
+   · <input type="text">: el campo donde se escribe.
+   · <label for="campo-nombre">: el título "nombra" el campo; al pulsarlo,
+     el cursor salta al campo, y los lectores de pantalla lo leen.
    · campo.focus(): pone el cursor en el campo para escribir directamente.
-   · evento.key: qué tecla se ha pulsado (para que Enter también sirva). */
+   · evento.key: la tecla pulsada, para que Enter también abra la carta. */
 function pintarNombre(){
     cambiarPantalla(`
         <section id="nombre" class="pantalla alacena">
@@ -340,7 +291,7 @@ function pintarNombre(){
 
 // lee el nombre del recuadro y, si está bien, abre la carta
 function guardarNombre(){
-    // quito los espacios del principio y del final
+    // .value es el texto escrito en el campo; trimStart y trimEnd quitan los espacios de los lados
     let respuesta = document.querySelector("#campo-nombre").value.trimStart().trimEnd();
 
     if(respuesta.length == 0){
@@ -413,7 +364,7 @@ function pintarCasas(){
 }
 
 
-/* ===== Pantalla 2 · TEST DEL SOMBRERO (diseno/2-test-seleccion-casa.png) ===== */
+/* ===== Pantalla 2 · TEST DEL SOMBRERO ===== */
 
 // pone a cero el test y enseña la primera pregunta
 function empezarTest(){
@@ -435,10 +386,10 @@ function cargarPregunta(){
             texto2 = "Poder leer la mente y saber la respuesta a cualquier pregunta.";
             texto3 = "Curar a los enfermos y conseguir que nadie se sienta solo.";
             texto4 = "Volverte invisible para hacer travesuras y salirte con la tuya.";
-            imagen1 = "respuesta-varita";       // FALTA IMAGEN: assets/img/respuesta-varita.png
-            imagen2 = "respuesta-libro";        // FALTA IMAGEN: assets/img/respuesta-libro.png
-            imagen3 = "respuesta-giratiempo";   // FALTA IMAGEN: assets/img/respuesta-giratiempo.png
-            imagen4 = "respuesta-capa";         // FALTA IMAGEN: assets/img/respuesta-capa.png
+            imagen1 = "test-1.1.png";
+            imagen2 = "test-1.2.png";
+            imagen3 = "test-1.3.png";
+            imagen4 = "test-1.4.png";
             ordenCasas = "GRHS";
             break;
         case 2:
@@ -447,10 +398,10 @@ function cargarPregunta(){
             texto2 = "Defenderlo si alguien intenta molestarle.";
             texto3 = "Guardar sus secretos y ayudarle a conseguir lo que quiere.";
             texto4 = "Ayudarle a hacer deberes o enseñarle cosas divertidas.";
-            imagen1 = "respuesta-manos";        // FALTA IMAGEN: assets/img/respuesta-manos.png
-            imagen2 = "respuesta-corazon";      // FALTA IMAGEN: assets/img/respuesta-corazon.png
-            imagen3 = "respuesta-escudo";       // FALTA IMAGEN: assets/img/respuesta-escudo.png
-            imagen4 = "respuesta-regalo";       // FALTA IMAGEN: assets/img/respuesta-regalo.png
+            imagen1 = "test-2.1.png";
+            imagen2 = "test-2.2.png";
+            imagen3 = "test-2.3.png";
+            imagen4 = "test-2.4.png";
             ordenCasas = "HGSR";
             break;
         case 3:
@@ -459,10 +410,10 @@ function cargarPregunta(){
             texto2 = "Un gato misterioso y astuto que solo te obedezca a ti.";
             texto3 = "Un ave fénix valiente que te proteja.";
             texto4 = "Cualquier animal fiel que siempre quiera jugar contigo.";
-            imagen1 = "respuesta-buho";         // FALTA IMAGEN: assets/img/respuesta-buho.png
-            imagen2 = "respuesta-gato";         // FALTA IMAGEN: assets/img/respuesta-gato.png
-            imagen3 = "respuesta-fenix";        // FALTA IMAGEN: assets/img/respuesta-fenix.png
-            imagen4 = "respuesta-tejon";        // FALTA IMAGEN: assets/img/respuesta-tejon.png
+            imagen1 = "test-3.1.png";
+            imagen2 = "test-3.2.png";
+            imagen3 = "test-3.3.png";
+            imagen4 = "test-3.4.png";
             ordenCasas = "RSGH";
             break;
         default:
@@ -471,18 +422,17 @@ function cargarPregunta(){
             texto2 = "Jugando en equipo, para que todos se diviertan.";
             texto3 = "Pensando en la mejor estrategia antes de jugar.";
             texto4 = "Haciendo lo que sea necesario para ganar.";
-            imagen1 = "respuesta-copa";         // FALTA IMAGEN: assets/img/respuesta-copa.png
-            imagen2 = "respuesta-estrella";     // FALTA IMAGEN: assets/img/respuesta-estrella.png
-            imagen3 = "respuesta-snitch";       // FALTA IMAGEN: assets/img/respuesta-snitch.png
-            imagen4 = "respuesta-dados";        // FALTA IMAGEN: assets/img/respuesta-dados.png
+            imagen1 = "test-4.1.png";
+            imagen2 = "test-4.2.png";
+            imagen3 = "test-4.3.png";
+            imagen4 = "test-4.4.png";
             ordenCasas = "GHRS";
             break;
     }
 }
 
-// HTML de una tarjeta de respuesta. Si es la elegida, lleva la clase "seleccionada"
-// La ruta se forma así: "assets/img/" + imagen1 (por ejemplo "respuesta-varita") + ".png"
-// Si tus imágenes del test no son .png, cambia ".png" aquí abajo   ← FALTA IMAGEN
+/* HTML de una tarjeta de respuesta. Si es la elegida, lleva la clase "seleccionada".
+   La ruta de la imagen es "assets/img/" + el nombre guardado en imagen1...imagen4 + ".png" */
 let tarjetaRespuesta = (numero, imagen, texto) => `
     <button id="respuesta-${numero}" class="tarjeta-respuesta ${(respuestaElegida == numero) ? "seleccionada" : ""}">
         <img src="assets/img/${imagen}.png" alt="">
@@ -638,7 +588,7 @@ function pintarResultado(){
 }
 
 
-/* ===== Pantalla 3 · TORNEO DE LA COPA (diseno/3-copa-de-la-casa.png) ===== */
+/* ===== Pantalla 3 · TORNEO DE LA COPA ===== */
 
 // HTML de un marcador. La casa del niño lleva la etiqueta "Tu casa"
 let tarjetaMarcador = (casaTarjeta) => `
@@ -680,7 +630,7 @@ function pintarTorneo(){
 }
 
 
-/* ===== Pantalla 4 · SALA DE LOS MINIJUEGOS (diseno/4-sala-minijuegos.png) ===== */
+/* ===== Pantalla 4 · SALA DE LOS MINIJUEGOS ===== */
 
 /* HTML de la tarjeta de un minijuego.
    Si ya está superado, la tarjeta y el botón llevan otras clases
@@ -696,7 +646,6 @@ let tarjetaMinijuego = (id, imagen, titulo, texto, superado) => `
     </div>`;
 
 function pintarSala(){
-    // FALTA IMAGEN: la tarjeta de las llaves usa assets/img/fondo-llaves.jpg
     cambiarPantalla(`
         <section id="sala" class="pantalla comedor ${casa}">
             <header>
@@ -704,8 +653,8 @@ function pintarSala(){
             </header>
             <div class="fila-tarjetas">
                 ${tarjetaMinijuego("jugar-pociones", "sala-pociones-03.jpg", "Aula de pociones", "En esta prueba tendrás que preparar una poción con el profesor Snape.", pocionesSuperado)}
-                ${tarjetaMinijuego("jugar-llaves", "llaves-voladoras.png", "Llaves voladoras", "En esta prueba tendrás que atrapar la llave vieja del castillo.", llavesSuperado)}
-                ${tarjetaMinijuego("jugar-ajedrez", "ajedrez-magico.png", "Ajedrez mágico", "En esta prueba tendrás que derrotar al rey del ajedrez.", ajedrezSuperado)}
+                ${tarjetaMinijuego("jugar-llaves", "llaves-voladoras.jpg", "Llaves voladoras", "En esta prueba tendrás que atrapar la llave vieja del castillo.", llavesSuperado)}
+                ${tarjetaMinijuego("jugar-ajedrez", "ajedrez-magico.jpg", "Ajedrez mágico", "En esta prueba tendrás que derrotar al rey del ajedrez.", ajedrezSuperado)}
             </div>
             <button id="boton-recuento" class="boton boton-oscuro">Volver al recuento de puntos</button>
         </section>
@@ -747,7 +696,7 @@ function pintarEnhorabuena(juego, texto, conPuntos){
 }
 
 
-/* ===== Pantalla 6 · FINAL (diseno/6-final.png) ===== */
+/* ===== Pantalla 6 · FINAL ===== */
 
 // 6.1 Gran Comedor neutro: todavía no se sabe quién gana
 function pintarFinalEspera(){
@@ -807,11 +756,9 @@ function volverAEmpezar(){
 
 
 /* =========================================================
-   4. MINIJUEGOS · ZONA AUTORIZADA
+   4. MINIJUEGOS
 
-   Aquí uso cosas que NO hemos dado en clase. Están autorizadas
-   solo para que los minijuegos funcionen como en el Figma
-   (apuntes/resumen.md, sección 5.3):
+   Para que los minijuegos funcionen se usa también:
 
    · setTimeout(función, ms)
        Ejecuta una función pasados unos milisegundos.
@@ -830,17 +777,17 @@ function volverAEmpezar(){
        Un array es una lista de valores: orden[0], orden[1]...
        Un objeto agrupa datos con nombre: llave.x, llave.y...
 
-   · elemento.classList.add("clase") / .remove("clase")
-       Pone o quita una clase de CSS a un elemento ya pintado
-       (por ejemplo "iluminada" en las piezas del ajedrez).
+   · elemento.classList.add("clase") / .remove("clase") / .contains("clase")
+       Pone, quita o comprueba una clase de CSS en un elemento ya
+       pintado (por ejemplo "iluminada" en las piezas del ajedrez).
 
    · elemento.style.transform = "translate(...)"
        Mueve un elemento desde JS (ingredientes y llaves).
 
    · Eventos de puntero: pointerdown, pointermove, pointerup
-       Como mousedown, mousemove y mouseup (están en la tabla de
-       eventos de los apuntes), pero funcionan también con el dedo
-       en el móvil. Sirven para arrastrar.
+       Como mousedown, mousemove y mouseup, pero funcionan también
+       con el dedo en el móvil. Sirven para arrastrar y para atrapar
+       las llaves.
 
    · getBoundingClientRect()
        Dice dónde está un elemento en la pantalla (izquierda,
@@ -865,9 +812,6 @@ function esperar(milisegundos, accion){
 /* ===== Pantalla 5.1 · POCIONES ===== */
 
 function pintarPocionesExplicacion(){
-    // FALTA IMAGEN: los 6 ingredientes de esta pantalla
-    // (assets/img/ingrediente-mandragora.png, ingrediente-ojos-arana.png, ingrediente-pelo-unicornio.png,
-    //  ingrediente-baba-sapo.png, ingrediente-escamas-dragon.png, ingrediente-cola-escorpion.png)
     cambiarPantalla(`
         <section id="pociones-explicacion" class="pantalla minijuego pociones">
             ${navegacionMinijuego()}
@@ -916,7 +860,6 @@ function pintarPocionesExplicacion(){
    data-orden (1 = el primero que hay que echar).
    Están desordenados alrededor del caldero con las clases lugar-... */
 function pintarPocionesJuego(){
-    // FALTA IMAGEN: los 6 ingredientes (los mismos de la explicación) y assets/img/caldero.png
     cambiarPantalla(`
         <section id="pociones-juego" class="pantalla minijuego pociones">
             ${navegacionMinijuego()}
@@ -975,8 +918,8 @@ function prepararArrastre(ingrediente){
         if(pocionTerminada){
             return;
         }
-        // le digo al navegador que no haga su propio arrastre de imagen
-        // (si lo hace, cancela el nuestro y el caldero no se entera)
+        // el navegador no hace su propio arrastre de imagen
+        // (si lo hiciera, cancelaría este y el caldero no se enteraría)
         evento.preventDefault();
         arrastrando = true;
         inicioX = evento.clientX;
@@ -1075,7 +1018,6 @@ function echarIngrediente(ingrediente){
 /* ===== Pantalla 5.2 · LLAVES VOLADORAS ===== */
 
 function pintarLlavesExplicacion(){
-    // FALTA IMAGEN: assets/img/llave-normal.png y assets/img/llave-vieja.png
     cambiarPantalla(`
         <section id="llaves-explicacion" class="pantalla minijuego llaves">
             ${navegacionMinijuego()}
@@ -1104,11 +1046,11 @@ function pintarLlavesExplicacion(){
     });
 }
 
-const totalLlaves = 12;
+// número de llaves que vuelan (una de ellas es la vieja)
+const totalLlaves = 20;
 
-/* VELOCIDAD DE LAS LLAVES: cuánto del ancho de la pantalla recorren
-   en un segundo (0.3 = un 30 %). Para que vayan más lentas, bájalo
-   (por ejemplo 0.03); para que vayan más rápidas, súbelo. */
+/* velocidad de las llaves: qué parte del ancho de la pantalla
+   recorren en un segundo (0.3 = un 30 %). Cuanto más alto, más rápido. */
 const velocidadLlaves = 0.3;
 
 function pintarLlavesJuego(){
@@ -1128,13 +1070,12 @@ function empezarLlaves(){
     const cielo = document.querySelector("#cielo-llaves");
     const estado = document.querySelector("#estado-llaves");
 
-    // 1. Elijo al azar cuál de las 12 será la llave vieja
+    // 1. Elijo al azar cuál será la llave vieja
     let posicionVieja = Math.floor(Math.random() * totalLlaves);
 
-    // 2. Pinto las 12 llaves con un bucle for (esto sí es del temario)
+    // 2. Pinto todas las llaves con un bucle for
     let html = "";
     for(let i = 0; i < totalLlaves; i++){
-        // FALTA IMAGEN: assets/img/llave-vieja.png y assets/img/llave-normal.png
         if(i == posicionVieja){
             html += `<button class="llave llave-vieja"><img src="assets/img/llave-antigua.png" alt="Llave vieja del castillo"></button>`;
         }else{
@@ -1148,8 +1089,7 @@ function empezarLlaves(){
     let elementos = document.querySelectorAll(".llave");
     let llaves = [];
 
-    // velocidad en píxeles POR SEGUNDO, según el ancho de la pantalla
-    // (con velocidadLlaves = 0.3, en una pantalla de 1500 px: hasta unos 450 px por segundo)
+    // velocidad en píxeles por segundo, según el ancho de la pantalla
     let velocidad = cielo.clientWidth * velocidadLlaves;
     // si el sistema pide "reducir movimiento", vuelan mucho más despacio (accesibilidad)
     if(window.matchMedia("(prefers-reduced-motion: reduce)").matches){
