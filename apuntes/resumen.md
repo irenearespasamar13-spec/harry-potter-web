@@ -269,3 +269,50 @@ Si hace falta algo de esto, hay que avisar y buscar alternativa con lo visto.
 3. Escuchar eventos o pedir datos (`prompt`).
 4. Condicionales / bucles.
 5. Mostrar el resultado (`alert`, `console.log`, `innerHTML`/`textContent`).
+
+---
+
+## 5. Ampliación autorizada para este proyecto
+
+Autorizado por Irene el 07/11/2026 para la web de Harry Potter. Todo lo que no esté en esta sección ni en las anteriores sigue sin poder usarse.
+
+### 5.1 HTML y CSS básico (de primer curso)
+| Qué | Para qué |
+|---|---|
+| `<img>` con `src` y `alt` | Escudos, sombrero, respuestas del test, ingredientes, llaves, piezas |
+| `<h2>`, `<h3>` | Jerarquía de títulos (accesibilidad) |
+| `<link rel="stylesheet">` | Enlazar `style.css` y las fuentes de Google Fonts |
+| `background-image` (y `background-size`, `background-position`) | Fondos ilustrados de cada pantalla |
+| `font-family`, `font-size`, `font-weight`, `line-height`, `letter-spacing`, `text-transform` | Tipografías del Figma |
+| `text-align` | Alinear textos |
+| `margin`, `padding` | Espacios |
+| `border` | Bordes del campo del nombre y líneas del test |
+| Propiedades de Flexbox y Grid (`justify-content`, `align-items`, `flex-direction`, `gap`…) | Centrar y ordenar elementos |
+| `:hover` | Efecto al pasar el ratón por botones y tarjetas |
+| `cursor: pointer` | Indicar que algo se puede pulsar |
+| `min-height`, unidad `vh` y `box-sizing: border-box` | Que cada pantalla ocupe exactamente el alto de la ventana. Añadido en la fase 2 (aprobado) |
+| `window.scrollTo(0, 0)` | Volver arriba al cambiar de pantalla (si no, en el móvil la pantalla nueva sale a mitad). Añadido en la fase 3 (aprobado) |
+
+### 5.2 Alternativas con lo dado (aprobadas)
+- **Nombre del niño**: al principio se pedía con `prompt()`. Después de la corrección de la profesora se escribe en un campo (ver 5.4).
+- **Cambiar de pantalla**: cada pantalla es una función que devuelve su HTML en una plantilla literal y se pinta con `innerHTML`. El color de la casa va dentro de la plantilla como clase: `class="comedor ${casa}"`.
+- **Puntos de las otras casas**: suben una cantidad fija cada vez que el niño vuelve al marcador (sin `setInterval`). La casa del niño siempre gana.
+- **Final**: botón "Descubrir la casa ganadora" en lugar de esperar 3 segundos (sin `setTimeout`).
+
+### 5.3 Conceptos nuevos solo para los 3 minijuegos
+Autorizado usar conocimientos no dados para que los minijuegos funcionen **tal cual el Figma**, con la condición de explicarlos bien en el código y al entregarlos:
+- **Pociones**: arrastrar los ingredientes al caldero.
+- **Llaves voladoras**: llaves que vuelan por la pantalla (animación).
+- **Ajedrez mágico**: piezas que se iluminan al azar, una más por ronda, durante 8 rondas (temporizadores y números aleatorios).
+- En el JS de los juegos: `setTimeout`, `requestAnimationFrame`, `Math.random`/`Math.floor`, arrays y objetos, `classList`, `style.transform`, eventos `pointerdown`/`pointermove`/`pointerup`, `getBoundingClientRect`, `dataset` y el atributo `aria-live` (accesibilidad). Todo explicado en la parte 4 de `code.js`.
+- En el CSS de los juegos: `position` (relative/absolute) con `top`/`left`/`bottom`, `aspect-ratio` y `filter: drop-shadow()` para el brillo.
+
+### 5.4 Cambios pedidos por la profesora (corrección del 10/11/2026)
+- **Nombre escrito en el recuadro naranja** en vez de una ventana `prompt()`. Para eso se usa:
+  - `<input type="text">` con `placeholder` y `maxlength`, y `<label for="...">` (accesibilidad).
+  - `campo.value` para leer lo escrito y `campo.focus()` para poner el cursor en el campo.
+  - El evento `keydown` (está en la tabla de eventos) con `evento.key == "Enter"`.
+  - En CSS: `:focus` y `::placeholder`.
+- **Caldero verde al acertar** (como el rojo al fallar): clase `acierto` con `filter: drop-shadow()` (zona de minijuegos).
+- **Minijuego superado con otra apariencia**: tarjeta con borde verde, sello "✓ Superada" y botón verde. Solo con clases y el operador ternario (temario).
+- **Fondos con la estética de la alacena** (ilustración plana y sencilla): trabajo de ilustración, no de código.

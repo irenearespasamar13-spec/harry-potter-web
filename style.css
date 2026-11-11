@@ -1,768 +1,1055 @@
-/* ==========================================================================
-   1. RESET BÁSICO Y ESTILOS GLOBALES
-   ========================================================================== */
+/* =========================================================
+   HOGWARTS · Hoja de estilos
 
-* {
-  box-sizing: border-box;
-  margin: 0;
-  padding: 0;
+   Colores principales:
+   - Naranja (botones y cajas):        #F4A549
+   - Amarillo (hover de los botones):  #FFD27F
+   - Azul noche (fondo de paneles):    #0F141D
+   - Azul pizarra (tarjetas):          #1A2332
+   - Azul grisáceo (respuestas test):  #3A4D66
+
+   Otros colores:
+   - Verde (prueba superada, acierto): #4CAF6E
+   - Rojo (la poción explota):         #FF5A36
+
+   Tipografías:
+   - Cinzel → títulos
+   - Old Standard TT → títulos del Gran Comedor y botones
+   - Inter → textos
+   - IM Fell English → la carta de Hogwarts
+   ========================================================= */
+
+
+/* ---------- 1. BÁSICOS ---------- */
+
+body {
+    margin: 0;
+    background-color: #0F141D;
+    color: white;
+    font-family: "Inter", Arial, sans-serif;
+    font-size: 1rem;
+    line-height: 1.5;
 }
 
-body, html {
-  width: 100%;
-  height: 100%;
-  overflow-x: hidden;
-  font-family: 'Montserrat', sans-serif;
-  background-color: #0D111A; /* Color de fondo azul noche de la aplicación */
+/* quito los márgenes que ponen los navegadores por defecto:
+   el espacio entre elementos lo da el "gap" de cada contenedor */
+h1, h2, h3, p {
+    margin: 0;
 }
 
-.oculto {
-  display: none !important;
+h1, h2 {
+    font-family: "Cinzel", Georgia, serif;
+    font-weight: 400;
+    text-transform: uppercase;
+    letter-spacing: 0.04em;
+    line-height: 1.25;
 }
 
-/* ==========================================================================
-   2. ESCENA PRINCIPAL (FONDO ILUSTRADO Y LAYOUT)
-   ========================================================================== */
-
-.escena-alacena {
-  position: relative;
-  width: 100vw;
-  height: 100vh;
-  background-image: url('assets/img/ilustracion-inicio-02.jpg');
-  background-position: center center;
-  background-repeat: no-repeat;
-  background-size: cover; 
+h1 {
+    font-size: 2.2rem;
 }
 
-/* ==========================================================================
-   3. TÍTULO SUPERIOR DERECHO ("BIENVENIDO PEQUEÑO MAGO")
-   ========================================================================== */
-
-.bloque-titulo {
-  position: absolute;
-  top: 8vh;
-  right: 6vw;
-  text-align: right;
+h2 {
+    font-size: 1.9rem;
 }
 
-.titulo-bienvenida {
-  font-family: 'Cinzel', serif;
-  font-weight: 500;
-  font-size: clamp(1.2rem, 4vw, 2.2rem);
-  color: #FFFFFF;
-  line-height: 1.2;
+
+/* ---------- 2. PANTALLAS ---------- */
+
+/* cada pantalla ocupa al menos todo el alto de la ventana
+   y coloca su contenido en columna, centrado */
+.pantalla {
+    /* box-sizing: border-box hace que el padding cuente DENTRO del alto,
+       así la pantalla mide exactamente el alto de la ventana */
+    box-sizing: border-box;
+    min-height: 100vh;
+    padding: 3rem 4rem;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 2rem;
+    background-size: cover;
+    background-position: center;
 }
 
-/* ==========================================================================
-   4. SOBRE Y ZONA INTERACTIVA (IZQUIERDA / ABAJO DE LA ESCALERA)
-   ========================================================================== */
 
-.zona-sobre {
-  position: absolute;
-  top: 45%;
-  left: 22%;
-  background: none;
-  border: none;
-  cursor: pointer;
-  outline: none;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  gap: 12px;
-  transition: transform 0.3s ease;
+/* ---------- 3. BOTONES ---------- */
+
+/* botón principal: naranja */
+.boton {
+    background-color: #F4A549;
+    color: #111111;
+    border: none;
+    padding: 0.7rem 3rem;
+    font-family: "Old Standard TT", Georgia, serif;
+    font-size: 1.05rem;
+    cursor: pointer;
 }
 
-.zona-sobre:hover {
-  transform: scale(1.08);
+/* al pasar el ratón se vuelve amarillo */
+.boton:hover {
+    background-color: #FFD27F;
 }
 
-.contenedor-icono {
-  width: 90px;
-  height: 60px;
-  border-radius: 4px;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  animation: haloParpadeo 2s infinite ease-in-out;
+/* botón secundario: azul oscuro (va encima de las ilustraciones) */
+.boton-oscuro {
+    background-color: #1A2332;
+    color: white;
 }
 
-.icono-sobre {
-  width: 100%;
-  height: auto;
-  display: block;
+/* al pasar el ratón se vuelve naranja */
+.boton-oscuro:hover {
+    background-color: #F4A549;
+    color: #111111;
 }
 
-.texto-sobre {
-  font-family: 'Montserrat', sans-serif;
-  font-weight: 700;
-  font-size: clamp(0.75rem, 1.5vw, 0.95rem);
-  color: #FFFFFF;
-  text-align: center;
-  line-height: 1.3;
-  letter-spacing: 0.5px;
+
+/* ---------- 4. FILAS DE TARJETAS ---------- */
+
+/* 4 tarjetas en fila (casas, respuestas, marcadores) */
+.fila-tarjetas {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 1.2rem;
+    width: 70%;
 }
 
-/* ==========================================================================
-   5. ANIMACIÓN CON KEYFRAMES (HALO DORADO DE LUZ)
-   ========================================================================== */
 
-@keyframes haloParpadeo {
-  0% { box-shadow: 0 0 10px 2px rgba(255, 215, 0, 0.4); }
-  50% { box-shadow: 0 0 28px 12px rgba(255, 215, 0, 0.95); }
-  100% { box-shadow: 0 0 10px 2px rgba(255, 215, 0, 0.4); }
+/* ---------- 5. INICIO: LA ALACENA ---------- */
+
+.alacena {
+    background-color: #001848;
+    background-image: url("assets/img/alacena-bajo-las-escaleras.jpg");
 }
 
-/* ==========================================================================
-   6. MODAL DEL FORMULARIO (ESTILO ANARANJADO)
-   ========================================================================== */
-
-.modal-formulario {
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  width: 90%;
-  max-width: 620px;
-  z-index: 10;
+/* 1.1 la alacena: título arriba a la derecha y sobre a la izquierda */
+#alacena {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    grid-template-rows: auto 1fr;
 }
 
-.caja-formulario {
-  background-color: #F8A74A; 
-  padding: 40px 35px;
-  border-radius: 4px;
-  box-shadow: 0 10px 35px rgba(0, 0, 0, 0.7);
-  display: flex;
-  flex-direction: column;
-  gap: 24px;
+#alacena > header {
+    grid-column: 2;
+    text-align: right;
 }
 
-.titulo-formulario {
-  font-family: 'Cinzel', serif;
-  font-size: clamp(1.5rem, 3vw, 2.2rem);
-  color: #231F20;
-  font-weight: 700;
-  letter-spacing: 1px;
+.boton-carta {
+    grid-column: 1;
+    grid-row: 2;
+    justify-self: center;
+    align-self: center;
+    background-color: transparent;
+    border: none;
+    color: white;
+    font-family: "Inter", Arial, sans-serif;
+    font-size: 0.85rem;
+    text-transform: uppercase;
+    cursor: pointer;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 0.5rem;
 }
 
-.input-nombre {
-  width: 100%;
-  padding: 16px 20px;
-  background-color: #FBB868; 
-  border: 1px solid #4A2E10;
-  border-radius: 2px;
-  font-family: 'Montserrat', sans-serif;
-  font-size: 1.1rem;
-  color: #231F20;
-  outline: none;
-  transition: background-color 0.3s ease, border-color 0.3s ease;
+.boton-carta > img {
+    width: 5rem;
 }
 
-.input-nombre:focus {
-  background-color: #FCD195;
-  border-color: #000000;
+.boton-carta:hover {
+    color: #FFD27F;
 }
 
-.input-nombre::placeholder {
-  color: #5C4328;
+/* 1.2 caja naranja del nombre */
+.caja-nombre {
+    background-color: #F4A549;
+    color: #111111;
+    padding: 1.5rem 2rem;
+    width: 40%;
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
 }
 
-.btn-continuar {
-  align-self: flex-end; 
-  background-color: #000626; 
-  color: #FFFFFF;
-  font-family: 'Montserrat', sans-serif;
-  font-weight: 700;
-  font-size: 0.95rem;
-  padding: 12px 30px;
-  border: none;
-  border-radius: 4px;
-  cursor: pointer;
-  letter-spacing: 1px;
-  transition: background-color 0.3s ease, transform 0.2s ease;
+/* el campo donde el niño escribe su nombre (un <input>) */
+.campo-nombre {
+    background-color: transparent;
+    border: 1px solid #1A2332;
+    padding: 0.8rem 1rem;
+    font-family: "Inter", Arial, sans-serif;
+    font-size: 1rem;
+    color: #111111;
 }
 
-.btn-continuar:hover {
-  background-color: #000626;
-  transform: translateY(-2px);
+/* el texto gris de ejemplo ("Introduce tu nombre...") */
+.campo-nombre::placeholder {
+    color: #5C4328;
 }
 
-/* ==========================================================================
-   7. MODAL DE LA CARTA ABIERTA (ESTILO HOJA DE PAPEL)
-   ========================================================================== */
-
-.modal-carta-abierta {
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  width: 90%;
-  max-width: 540px; 
-  max-height: 90vh; 
-  overflow-y: auto;
-  z-index: 20;
+/* al pasar el ratón o al escribir dentro, el campo se pone amarillo */
+.campo-nombre:hover,
+.campo-nombre:focus {
+    background-color: #FFD27F;
 }
 
-.caja-carta {
-  background-color: #FFFFFF; 
-  padding: 40px 45px;
-  box-shadow: 0 12px 40px rgba(0, 0, 0, 0.8);
-  display: flex;
-  flex-direction: column;
-  align-items: flex-start;
-  gap: 20px;
+/* el título "¿Cómo te llamas?" es la etiqueta (label) del campo */
+.caja-nombre > h2 > label {
+    cursor: pointer;
 }
 
-.contenedor-escudo {
-  width: 100%;
-  display: flex;
-  justify-content: center;
-  margin-bottom: 10px;
+/* botón "Abrir mi carta", a la derecha */
+.caja-nombre > .boton {
+    align-self: flex-end;
+}
+
+/* dentro del recuadro naranja, el hover es amarillo
+   (si fuera naranja, el botón "desaparecería" sobre el fondo) */
+.caja-nombre > .boton-oscuro:hover {
+    background-color: #FFD27F;
+}
+
+/* 1.3 la carta de Hogwarts */
+.carta {
+    background-color: white;
+    color: #111111;
+    width: 24rem;
+    padding: 2.5rem;
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+    font-family: "IM Fell English", Georgia, serif;
+    font-size: 1.1rem;
 }
 
 .escudo-hogwarts {
-  width: 110px;
-  height: auto;
+    width: 7rem;
+    align-self: center;
 }
 
-.saludo-carta {
-  font-family: 'Georgia', serif;
-  font-size: 1.15rem;
-  color: #111111;
-  font-weight: 500;
+.carta > .boton {
+    margin-top: 1rem;
+    font-family: "Inter", Arial, sans-serif;
+    font-size: 0.95rem;
 }
 
-.parrafo-carta {
-  font-family: 'Georgia', serif;
-  font-size: 1.05rem;
-  color: #222222;
-  line-height: 1.6;
+
+/* ---------- 6. GRAN COMEDOR: FONDOS DE CADA CASA ---------- */
+
+/* Cada casa tiene su versión del Gran Comedor. El color de fondo
+   se ve mientras carga la imagen (o si no la encuentra). */
+.neutro {
+    background-color: #460643;
+    background-image: url("assets/img/fondo-gran-comedor.jpg");
 }
 
-.firma-carta {
-  font-family: 'Georgia', serif;
-  font-size: 1.05rem;
-  color: #222222;
-  line-height: 1.4;
-  margin-top: 5px;
+.gryffindor {
+    background-color: #5E0000;
+    background-image: url("assets/img/gran-comedor-griffindor.jpg");
 }
 
-.nombre-firma {
-  font-weight: 500;
+.slytherin {
+    background-color: #001E0F;
+    background-image: url("assets/img/gran-comedor-slitherin.jpg");
 }
 
-.btn-entrar-hogwarts {
-  width: 100%;
-  margin-top: 15px;
-  background-color: #F8A74A; 
-  color: #1A1A1A;
-  font-family: 'Montserrat', sans-serif;
-  font-weight: 700;
-  font-size: 1rem;
-  padding: 14px 20px;
-  border: none;
-  border-radius: 2px;
-  cursor: pointer;
-  text-align: center;
-  transition: background-color 0.3s ease, transform 0.2s ease;
+.ravenclaw {
+    background-color: #001944;
+    background-image: url("assets/img/gran-comedor-ravenclaw.jpg");
 }
 
-.btn-entrar-hogwarts:hover {
-  background-color: #E69538;
-  transform: translateY(-2px);
+.hufflepuff {
+    background-color: #2A1B10;
+    background-image: url("assets/img/gran-comedor-hufflepuff.jpg");
 }
 
-/* ==========================================================================
-   8. ESCENA 2: EL GRAN COMEDOR Y LAS TARJETAS DE LAS CASAS
-   ========================================================================== */
-
-.escena-gran-comedor {
-  position: relative;
-  width: 100vw;
-  min-height: 100vh;
-  padding: 5vh 5vw;
-  background-image: url('assets/img/fondo-gran-comedor.jpg');
-  background-position: center center;
-  background-repeat: no-repeat;
-  background-size: cover;
-  display: flex;
-  flex-direction: column;
-  justify-content: space-between;
-  align-items: center;
-  gap: 30px;
+/* cabecera de las pantallas del Gran Comedor */
+.comedor > header {
+    width: 60%;
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    gap: 0.8rem;
 }
 
-.header-gran-comedor {
-  text-align: center;
-  max-width: 900px;
+.comedor > header > h2 {
+    font-family: "Old Standard TT", Georgia, serif;
+    font-size: 2.2rem;
 }
 
-.titulo-gran-comedor {
-  font-family: 'Cinzel', serif;
-  font-size: clamp(1.8rem, 3.5vw, 2.8rem);
-  color: #FFFFFF;
-  font-weight: 500;
-  letter-spacing: 2px;
-  margin-bottom: 12px;
-  text-shadow: 2px 2px 10px rgba(0, 0, 0, 0.8);
+.comedor > header > p {
+    font-size: 0.9rem;
 }
 
-.subtitulo-gran-comedor {
-  font-family: 'Montserrat', sans-serif;
-  font-size: clamp(0.9rem, 1.5vw, 1.05rem);
-  color: #FFFFFF;
-  line-height: 1.5;
-  text-shadow: 1px 1px 6px rgba(0, 0, 0, 0.9);
+/* en la pantalla de las cuatro casas el título va en Cinzel */
+#casas > header > h2 {
+    font-family: "Cinzel", Georgia, serif;
 }
 
-.contenedor-casas {
-  display: grid;
-  grid-template-columns: repeat(4, 1fr);
-  gap: 20px;
-  width: 100%;
-  max-width: 1200px;
-}
+
+/* ---------- 7. TARJETAS DE LAS CASAS Y MARCADOR ---------- */
 
 .tarjeta-casa {
-  background-color: #121A26; 
-  padding: 24px 20px;
-  border-radius: 2px;
-  box-shadow: 0 8px 25px rgba(0, 0, 0, 0.6);
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  text-align: center;
-  gap: 16px;
-  transition: transform 0.3s ease, box-shadow 0.3s ease;
+    background-color: #1A2332;
+    border: 3px solid transparent;
+    padding: 1.2rem;
+    display: flex;
+    flex-direction: column;
+    gap: 0.6rem;
 }
 
-.tarjeta-casa:hover {
-  transform: translateY(-6px);
-  box-shadow: 0 12px 30px rgba(0, 0, 0, 0.9);
+
+/* todos los escudos con la misma altura, así los nombres quedan alineados */
+.tarjeta-casa > img {
+    height: 7rem;
+    width: auto;
+    align-self: center;
 }
 
-.caja-imagen-casa {
-  width: 100%;
-  height: 160px;
-  background-color: #D6D6D6; 
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  border-radius: 2px;
-  overflow: hidden;
-}
-
-.imagen-escudo-casa {
-  max-width: 80%;
-  max-height: 80%;
-  object-fit: contain;
-}
-
-.nombre-casa {
-  font-family: 'Cinzel', serif;
-  font-size: 1.2rem;
-  color: #FFFFFF;
-  font-weight: 700;
-  letter-spacing: 1px;
-}
-
-.descripcion-casa {
-  font-family: 'Montserrat', sans-serif;
-  font-size: 0.85rem;
-  color: #D1D5DB;
-  line-height: 1.5;
-}
-
-.contenedor-btn-test {
-  width: 100%;
-  display: flex;
-  justify-content: center;
-  margin-top: 10px;
-}
-
-.btn-ir-test {
-  background-color: #F8A74A; 
-  color: #1A1A1A;
-  font-family: 'Montserrat', sans-serif;
-  font-weight: 700;
-  font-size: 1.05rem;
-  padding: 16px 40px;
-  border: none;
-  border-radius: 2px;
-  cursor: pointer;
-  letter-spacing: 0.5px;
-  transition: background-color 0.3s ease, transform 0.2s ease;
-}
-
-.btn-ir-test:hover {
-  background-color: #E69538;
-  transform: scale(1.03);
-}
-
-/* ==========================================================================
-   9. ESCENA 3: EL TEST DEL SOMBRERO SELECCIONADOR
-   ========================================================================== */
-
-.escena-test-sombrero {
-  position: relative;
-  width: 100vw;
-  min-height: 100vh;
-  padding: 40px 5vw;
-  background-color: #0D111A; 
-  display: flex;
-  flex-direction: column;
-  justify-content: space-between;
-  align-items: center;
-  gap: 25px;
-}
-
-.contenedor-sombrero {
-  width: 100%;
-  display: flex;
-  justify-content: center;
-}
-
-.imagen-sombrero {
-  width: 120px;
-  height: auto;
-  filter: drop-shadow(0 4px 15px rgba(0, 0, 0, 0.7));
-}
-
-.header-pregunta {
-  text-align: center;
-  max-width: 1000px;
-}
-
-.titulo-pregunta {
-  font-family: 'Cinzel', serif;
-  font-size: clamp(1.6rem, 3.2vw, 2.5rem);
-  color: #FFFFFF;
-  font-weight: 500;
-  letter-spacing: 2px;
-  line-height: 1.3;
-}
-
-.contenedor-respuestas {
-  display: grid;
-  grid-template-columns: repeat(4, 1fr);
-  gap: 24px;
-  width: 100%;
-  max-width: 1250px;
-}
-
-.tarjeta-opcion {
-  background-color: #384A63; 
-  border: 2px solid transparent;
-  border-radius: 2px;
-  padding: 20px 18px;
-  cursor: pointer;
-  outline: none;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  gap: 18px;
-  text-align: center;
-  transition: transform 0.25s ease, background-color 0.25s ease, border-color 0.25s ease;
-}
-
-.tarjeta-opcion:hover {
-  transform: translateY(-5px);
-  background-color: #435874;
-}
-
-.tarjeta-opcion.tarjeta-seleccionada {
-  border-color: #F8A74A !important;
-  background-color: #49607E !important;
-  box-shadow: 0 0 20px rgba(248, 167, 74, 0.5);
-}
-
-.caja-imagen-opcion {
-  width: 100%;
-  height: 200px;
-  background-color: #D5D5D5; 
-  border-radius: 2px;
-  overflow: hidden;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-}
-
-.imagen-opcion {
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-}
-
-.texto-opcion {
-  font-family: 'Montserrat', sans-serif;
-  font-size: 0.9rem;
-  color: #FFFFFF;
-  line-height: 1.45;
-  font-weight: 500;
-}
-
-.contenedor-btn-siguiente {
-  width: 100%;
-  display: flex;
-  justify-content: center;
-  margin-top: 10px;
-}
-
-.btn-siguiente-pregunta {
-  background-color: #F8A74A; 
-  color: #1A1A1A;
-  font-family: 'Cinzel', serif;
-  font-weight: 700;
-  font-size: 1.05rem;
-  padding: 14px 45px;
-  border: none;
-  border-radius: 2px;
-  cursor: pointer;
-  letter-spacing: 0.5px;
-  transition: background-color 0.3s ease, transform 0.2s ease;
-}
-
-.btn-siguiente-pregunta:hover {
-  background-color: #E69538;
-  transform: scale(1.03);
-}
-
-/* ==========================================================================
-   10. NUEVO: ESCENA 4: PANTALLA RESULTADO DEL TEST (ESTÉTIKA FIGMA)
-   ========================================================================== */
-
-.escena-resultado-casa {
-  position: relative;
-  width: 100vw;
-  min-height: 100vh;
-  padding: 60px 5vw;
-  background-color: #0D111A; /* Fondo azul noche idéntico al de tu boceto de Figma */
-  
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-  gap: 40px;
-}
-
-/* Encabezado superior del resultado */
-.header-resultado {
-  width: 100%;
-  max-width: 1100px;
-  text-align: left;
-}
-
-.titulo-resultado-encabezado {
-  font-family: 'Cinzel', serif;
-  font-size: clamp(1.8rem, 3.8vw, 3rem);
-  color: #FFFFFF;
-  font-weight: 500;
-  letter-spacing: 2px;
-}
-
-/* Tarjeta contenedora de la información del resultado (Azul grisáceo) */
-.tarjeta-resultado-casa {
-  background-color: #384A63; /* Mismo azul grisáceo del bloque de tu captura */
-  width: 100%;
-  max-width: 1100px;
-  padding: 45px 50px;
-  border-radius: 2px;
-  box-shadow: 0 15px 40px rgba(0, 0, 0, 0.7);
-  
-  /* Flexbox horizontal para colocar el escudo a la izquierda y el texto a la derecha */
-  display: flex;
-  flex-direction: row;
-  align-items: center;
-  gap: 45px;
-}
-
-/* Caja contenedora del escudo con textura/color pergamino claro */
-.caja-escudo-resultado {
-  width: 280px;
-  height: 280px;
-  min-width: 280px; /* Impide que se encoja en Flexbox */
-  background-color: #F7EBE0; /* Fondo pergamino beige claro según tu captura */
-  border-radius: 24px;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  padding: 20px;
-  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.3);
-}
-
-.escudo-resultado-img {
-  width: 100%;
-  height: 100%;
-  object-fit: contain;
-}
-
-/* Bloque textual con título y descripción */
-.info-resultado-casa {
-  display: flex;
-  flex-direction: column;
-  gap: 18px;
-  color: #FFFFFF;
-}
-
-.nombre-casa-resultado {
-  font-family: 'Cinzel', serif;
-  font-size: clamp(2rem, 3.5vw, 2.8rem);
-  font-weight: 700;
-  letter-spacing: 2px;
-  color: #FFFFFF;
-}
-
-.descripcion-casa-resultado {
-  font-family: 'Montserrat', sans-serif;
-  font-size: clamp(0.9rem, 1.2vw, 1.05rem);
-  line-height: 1.65;
-  color: #E2E8F0;
-}
-
-/* Botón 'Ir al Gran Comedor' */
-.contenedor-btn-resultado {
-  width: 100%;
-  display: flex;
-  justify-content: center;
-}
-
-.btn-ir-gran-comedor-final {
-  background-color: #F8A74A; /* Naranja idéntico a tu boceto */
-  color: #1A1A1A;
-  font-family: 'Cinzel', serif;
-  font-weight: 700;
-  font-size: 1.1rem;
-  padding: 15px 50px;
-  border: none;
-  border-radius: 2px;
-  cursor: pointer;
-  letter-spacing: 0.5px;
-  transition: background-color 0.3s ease, transform 0.2s ease;
-}
-
-.btn-ir-gran-comedor-final:hover {
-  background-color: #E69538;
-  transform: scale(1.03);
-}
-
-/* ==========================================================================
-   11. ADAPTACIÓN RESPONSIVE PARA DISPOSITIVOS MÓVILES (MEDIA QUERIES)
-   ========================================================================== */
-
-@media (max-width: 900px) {
-  .contenedor-casas {
-    grid-template-columns: repeat(2, 1fr);
-  }
-
-  .contenedor-respuestas {
-    grid-template-columns: repeat(2, 1fr);
-  }
-
-  /* Adaptación de la tarjeta del resultado en tablets y pantallas intermedias */
-  .tarjeta-resultado-casa {
-    flex-direction: column; /* Pasa a ser vertical (escudo arriba, texto abajo) */
-    padding: 30px 25px;
-    text-align: center;
-    gap: 25px;
-  }
-
-  .caja-escudo-resultado {
-    width: 220px;
-    height: 220px;
-    min-width: 220px;
-  }
-}
-
-@media (max-width: 768px) {
-  .escena-alacena {
-    background-position: 65% center;
-  }
-
-  .bloque-titulo {
-    top: 5vh;
-    right: 5vw;
-  }
-
-  .zona-sobre {
-    top: 48%;
-    left: 12%;
-  }
-
-  .contenedor-icono {
-    width: 70px;
-    height: 48px;
-  }
-  
-  .caja-formulario {
-    padding: 25px 20px;
-  }
-
-  .btn-continuar {
-    width: 100%;
-    text-align: center;
-  }
-
-  .caja-carta {
-    padding: 30px 25px;
-    gap: 16px;
-  }
-
-  .escudo-hogwarts {
-    width: 85px;
-  }
-
-  .saludo-carta, .parrafo-carta, .firma-carta {
+.tarjeta-casa > h3 {
     font-size: 0.95rem;
-  }
+    font-weight: 400;
+    text-transform: uppercase;
+}
 
-  .escena-gran-comedor {
-    padding: 30px 20px;
-    overflow-y: auto;
-  }
+.tarjeta-casa > p {
+    font-size: 0.85rem;
+    line-height: 1.4;
+}
 
-  .contenedor-casas {
-    grid-template-columns: 1fr;
-    gap: 20px;
-  }
+/* marcador del torneo: todo centrado y el número muy grande */
+.marcador {
+    align-items: center;
+    text-align: center;
+}
 
-  .btn-ir-test {
+/* uso ".marcador > .puntos" (y no solo ".puntos") para que gane a
+   ".tarjeta-casa > p", que es más específica y pondría el número pequeño */
+.marcador > .puntos {
+    font-size: 3.5rem;
+    line-height: 1.1;
+}
+
+
+/* ---------- 8. TEST DEL SOMBRERO ---------- */
+
+.test {
+    background-color: #0F141D;
+}
+
+.cabecera-test {
+    width: 70%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 1.5rem;
+    text-align: center;
+}
+
+/* línea · sombrero · línea */
+.sombrero-con-lineas {
     width: 100%;
+    display: grid;
+    grid-template-columns: 1fr auto 1fr;
+    align-items: center;
+    gap: 2rem;
+}
+
+.sombrero-con-lineas > img {
+    width: 6rem;
+}
+
+.linea {
+    border-top: 2px solid #F4A549;
+}
+
+/* tarjeta de respuesta: imagen arriba y texto abajo */
+.tarjeta-respuesta {
+    background-color: #3A4D66;
+    border: 3px solid transparent;
+    color: white;
+    padding: 1.5rem 1rem;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 1rem;
+    font-family: "Inter", Arial, sans-serif;
+    font-size: 0.9rem;
+    text-align: left;
+    cursor: pointer;
+}
+
+.tarjeta-respuesta:hover {
+    border-color: #F4A549;
+}
+
+/* la respuesta elegida (la clase la pone JavaScript al pulsar la tarjeta) */
+.seleccionada {
+    border-color: #FFD27F;
+    background-color: #4A6182;
+}
+
+.tarjeta-respuesta > img {
+    width: 75%;
+}
+
+
+/* ---------- 9. RESULTADO DEL TEST ---------- */
+
+#resultado > header {
+    text-align: left;
+}
+
+.caja-resultado {
+    background-color: #1A2332;
+    width: 60%;
+    padding: 2rem 2.5rem;
+    display: grid;
+    grid-template-columns: 1fr 2.2fr;
+    align-items: center;
+    gap: 2rem;
+}
+
+.caja-resultado > img {
+    width: 85%;
+    justify-self: center;
+}
+
+.caja-resultado > div {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+}
+
+.caja-resultado > div > h3 {
+    font-family: "Old Standard TT", Georgia, serif;
+    font-size: 1.8rem;
+    font-weight: 400;
+    text-transform: uppercase;
+}
+
+.caja-resultado > div > p {
+    font-size: 0.9rem;
+}
+
+
+/* ---------- 10. SALA DE LOS MINIJUEGOS ---------- */
+
+/* aquí la fila tiene 3 tarjetas en vez de 4 */
+#sala > .fila-tarjetas {
+    grid-template-columns: repeat(3, 1fr);
+    width: 60%;
+}
+
+.tarjeta-minijuego {
+    background-color: #1A2332;
+    border: 3px solid transparent;
+    padding: 1.2rem;
+    display: flex;
+    flex-direction: column;
+    gap: 0.8rem;
     text-align: center;
-  }
+}
 
-  .escena-test-sombrero {
-    padding: 25px 16px;
-    overflow-y: auto;
-  }
+.tarjeta-minijuego:hover {
+    border-color: #F4A549;
+}
 
-  .imagen-sombrero {
-    width: 90px;
-  }
-
-  .titulo-pregunta {
-    font-size: 1.3rem;
-  }
-
-  .contenedor-respuestas {
-    grid-template-columns: 1fr;
-    gap: 16px;
-  }
-
-  .caja-imagen-opcion {
-    height: 140px;
-  }
-
-  .btn-siguiente-pregunta {
+.tarjeta-minijuego > img {
     width: 100%;
-    text-align: center;
-  }
+}
 
-  /* Adaptación final del resultado para móviles */
-  .header-resultado {
-    text-align: center;
-  }
+.tarjeta-minijuego > h3 {
+    font-size: 1rem;
+    font-weight: 400;
+    text-transform: uppercase;
+}
 
-  .btn-ir-gran-comedor-final {
+.tarjeta-minijuego > p {
+    font-size: 0.85rem;
+}
+
+/* --- MINIJUEGO YA SUPERADO ---
+   La tarjeta, el sello y el botón cambian a VERDE para que se vea
+   de un vistazo que esa prueba ya está hecha. */
+.tarjeta-superada {
+    border-color: #4CAF6E;
+}
+
+.tarjeta-superada:hover {
+    border-color: #7FDB9E;
+}
+
+/* sello "✓ Superada" encima de la imagen ("> .sello-superada" para que gane a ".tarjeta-minijuego > p") */
+.tarjeta-minijuego > .sello-superada {
+    align-self: center;
+    background-color: #4CAF6E;
+    color: #0F141D;
+    font-weight: 600;
+    font-size: 0.8rem;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    padding: 0.2rem 0.8rem;
+}
+
+/* botón "Volver a jugar": verde con borde, en vez de naranja */
+.boton-superado {
+    background-color: transparent;
+    color: #7FDB9E;
+    border: 2px solid #4CAF6E;
+}
+
+.boton-superado:hover {
+    background-color: #4CAF6E;
+    color: #0F141D;
+}
+
+
+/* ---------- 11. MINIJUEGOS: PARTES COMUNES ---------- */
+
+.pociones {
+    background-color: #01445F;
+    background-image: url("assets/img/sala-pociones-03.jpg");
+}
+
+.llaves {
+    background-color: #4E4A55;
+    background-image: url("assets/img/llaves-voladoras.jpg");
+}
+
+.ajedrez {
+    background-color: #3A2B28;
+    background-image: url("assets/img/ajedrez-magico.jpg");
+}
+
+/* botones "Sala de los minijuegos" y "Contador de puntos" arriba a la derecha */
+.navegacion-minijuego {
+    align-self: flex-end;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.8rem;
+}
+
+.navegacion-minijuego > .boton {
+    padding: 0.5rem 1.2rem;
+    font-size: 0.9rem;
+}
+
+/* caja oscura de la explicación */
+.caja-minijuego {
+    background-color: #0F141D;
+    width: 55%;
+    padding: 2.5rem 3rem;
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+    font-size: 0.95rem;
+}
+
+.caja-minijuego > h2 {
+    text-align: center;
+}
+
+.caja-minijuego > .boton {
+    align-self: center;
+    margin-top: 0.5rem;
+}
+
+/* fila de ingredientes (o de llaves) con su nombre debajo */
+.fila-ingredientes {
+    display: grid;
+    grid-template-columns: repeat(6, 1fr);
+    gap: 1rem;
+}
+
+#llaves-explicacion > .caja-minijuego > .fila-ingredientes {
+    grid-template-columns: repeat(2, 1fr);
+    width: 60%;
+    align-self: center;
+}
+
+.ingrediente {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 0.4rem;
+    font-size: 0.8rem;
+    text-align: center;
+}
+
+.ingrediente > img {
+    width: 3.5rem;
+}
+
+/* caja estrecha de "¡Enhorabuena!" */
+.caja-enhorabuena {
+    width: 18rem;
+}
+
+.caja-enhorabuena > h2 {
+    text-align: left;
+    font-size: 1.5rem;
+}
+
+.caja-enhorabuena > p {
+    font-family: "Cinzel", Georgia, serif;
+    font-size: 1.25rem;
+    text-transform: uppercase;
+    line-height: 1.35;
+}
+
+/* Las imágenes de dentro de ingredientes, llaves y piezas "no reciben el ratón"
+   (pointer-events: none). Así:
+   - el navegador no arrastra la imagen por su cuenta (eso cancelaría
+     el arrastre de los ingredientes y no llegarían al caldero);
+   - el clic siempre llega al botón que las contiene. */
+.ingrediente-arrastrable > img,
+.llave > img,
+.pieza > img {
+    pointer-events: none;
+    user-select: none;
+    -webkit-user-drag: none;
+}
+
+
+
+/* =========================================================
+   12. MINIJUEGOS: LOS JUEGOS
+   Colocación de los elementos de cada juego (position), brillos
+   (filter: drop-shadow) y proporción del tablero (aspect-ratio).
+   ========================================================= */
+
+/* --- POCIONES: ingredientes alrededor del caldero --- */
+
+/* "position: relative" convierte la mesa en la referencia:
+   los ingredientes se colocan con top/left en % DENTRO de la mesa */
+.mesa-pociones {
+    position: relative;
     width: 100%;
+    height: 70vh;
+}
+
+.ingrediente-arrastrable {
+    position: absolute;
+    width: 6rem;
+    background-color: transparent;
+    border: none;
+    padding: 0;
+    color: white;
+    cursor: grab;
+}
+
+.ingrediente-arrastrable > img {
+    width: 100%;
+}
+
+.ingrediente-arrastrable:hover {
+    filter: drop-shadow(0 0 10px #FFD27F);
+}
+
+/* touch-action: none evita que, al arrastrar con el dedo, se mueva la página */
+.ingrediente-arrastrable {
+    touch-action: none;
+}
+
+/* mientras se arrastra: por encima de todo y con brillo */
+.arrastrando {
+    z-index: 2;
+    cursor: grabbing;
+    filter: drop-shadow(0 0 12px #FFD27F);
+}
+
+/* ingrediente ya echado al caldero */
+.dentro-del-caldero {
+    display: none;
+}
+
+/* sitio de cada ingrediente alrededor del caldero */
+.lugar-escamas    { top: 5%;  left: 15%; }
+.lugar-cola       { top: 0%;  left: 55%; }
+.lugar-baba       { top: 25%; left: 35%; }
+.lugar-ojos       { top: 15%; left: 78%; }
+.lugar-mandragora { top: 60%; left: 12%; }
+.lugar-pelo       { top: 62%; left: 75%; }
+
+.caldero {
+    position: absolute;
+    bottom: 0;
+    left: 40%;
+    width: 20%;
+    min-height: 8rem;
+    display: flex;
+    align-items: flex-end;
+    justify-content: center;
+}
+
+/* el caldero brilla cuando un ingrediente está encima */
+.caldero-activo {
+    filter: drop-shadow(0 0 16px #FFD27F);
+}
+
+/* ingrediente equivocado: brillo ROJO (¡la poción explota!) */
+.explosion {
+    filter: drop-shadow(0 0 20px #FF5A36) drop-shadow(0 0 40px #FF5A36);
+}
+
+/* ingrediente correcto: brillo VERDE (lo pone JavaScript 0,8 segundos) */
+.acierto {
+    filter: drop-shadow(0 0 20px #4CD964) drop-shadow(0 0 40px #4CD964);
+}
+
+.caldero > img {
+    width: 100%;
+}
+
+/* --- LLAVES: vuelan dentro del "cielo" ---
+   Todas empiezan arriba a la izquierda (left: 0; top: 0) y JS las
+   mueve con transform: translate(x, y) en cada fotograma */
+.cielo-llaves {
+    position: relative;
+    width: 100%;
+    height: 65vh;
+    overflow: hidden;
+}
+
+.llave {
+    position: absolute;
+    left: 0;
+    top: 0;
+    background-color: transparent;
+    border: none;
+    padding: 0;
+    color: white;
+    cursor: pointer;
+}
+
+.llave > img {
+    width: 5rem;
+}
+
+.llave:hover {
+    filter: drop-shadow(0 0 8px #FFD27F);
+}
+
+/* la llave vieja cuando la atrapas */
+.llave.atrapada {
+    filter: drop-shadow(0 0 8px #FFD27F) drop-shadow(0 0 24px #F4A549);
+}
+
+/* --- AJEDREZ: las piezas encima del fondo, cada una en su sitio --- */
+
+/* La pantalla del juego mide exactamente lo que la ventana
+   y recorta lo que sobresalga del tablero (overflow: hidden),
+   igual que hace un fondo con background-size: cover. */
+#ajedrez-juego {
+    background-image: none;
+    justify-content: flex-start;
+    position: relative;
+    height: 100vh;
+    overflow: hidden;
+    padding-top: 1.5rem;
+    padding-bottom: 1.5rem;
+    gap: 1rem;
+}
+
+/* los botones, la ronda y el mensaje van ENCIMA del tablero */
+#ajedrez-juego > .navegacion-minijuego,
+#ajedrez-juego > .ronda,
+#ajedrez-juego > .estado-juego {
+    position: relative;
+    z-index: 1;
+}
+
+.ronda {
+    font-family: "Cinzel", Georgia, serif;
+    font-size: 1.5rem;
+    text-transform: uppercase;
+}
+
+/* EL TABLERO OCUPA TODA LA PANTALLA (como un fondo "cover").
+   Mantiene la proporción de la imagen (1556 x 1011) para que las
+   piezas, colocadas en %, caigan siempre en su sitio.
+
+   Ancho: el MÁS GRANDE de estos dos (eso hace max()):
+   - todo el ancho de la pantalla (100%), o
+   - lo que hace falta para cubrir todo el alto: 100vh × 1.539
+     (1.539 = 1556 / 1011, la proporción de la imagen).
+   Así siempre cubre la pantalla entera; lo que sobra se recorta.
+   Está centrado: left/top 50% y transform lo mueve la mitad de su tamaño. */
+.tablero {
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+    width: max(100%, calc(100vh * 1.539));
+    aspect-ratio: 1556 / 1011;
+    background-image: url("assets/img/ajedrez-magico.jpg");
+    background-size: 100% 100%;
+}
+
+.pieza {
+    position: absolute;
+    background-color: transparent;
+    border: none;
+    padding: 0;
+    cursor: pointer;
+}
+
+.pieza > img {
+    width: 100%;
+    display: block;
+}
+
+.pieza:hover {
+    filter: drop-shadow(0 0 10px #FFD27F);
+}
+
+/* pieza iluminada (la pone JavaScript). ".pieza.iluminada" para que gane a ".pieza:hover" */
+.pieza.iluminada {
+    filter: drop-shadow(0 0 6px #FFD27F) drop-shadow(0 0 22px #F4A549);
+}
+
+/* posición y ancho de cada pieza, en % de la imagen original */
+.pieza-torre-blanca   { left: 0%;     top: 31.95%; width: 15.55%; }
+.pieza-caballo-blanco { left: 12.72%; top: 41.54%; width: 11.70%; }
+.pieza-alfil-blanco   { left: 22.88%; top: 44.31%; width: 8.80%; }
+.pieza-rey-blanco     { left: 30.40%; top: 44.21%; width: 7.20%; }
+.pieza-rey-negro      { left: 63.11%; top: 43.92%; width: 7.46%; }
+.pieza-alfil-negro    { left: 69.22%; top: 44.81%; width: 8.68%; }
+.pieza-caballo-negro  { left: 76.35%; top: 41.35%; width: 12.02%; }
+.pieza-torre-negra    { left: 84.96%; top: 32.84%; width: 15.04%; }
+
+
+/* ---------- 13. TEXTOS QUE AÑADE JAVASCRIPT ---------- */
+
+/* avisos ("Elige una respuesta antes de seguir") */
+.aviso {
+    font-weight: 600;
+    color: #FFD27F;
     text-align: center;
-  }
+}
+
+/* en la caja naranja del nombre, el aviso va oscuro para que se lea */
+.caja-nombre > .aviso {
+    color: #5C1A00;
+    text-align: left;
+}
+
+.contador-preguntas {
+    font-size: 0.85rem;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: #F4A549;
+}
+
+/* etiqueta "Tu casa" en el marcador */
+.tu-casa {
+    background-color: #F4A549;
+    color: #111111;
+    font-size: 0.75rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    padding: 0.2rem 0.6rem;
+}
+
+/* mensajes de los minijuegos ("¡Tu turno!", "¡Esa no es!") */
+.estado-juego {
+    background-color: #0F141D;
+    padding: 0.6rem 1.2rem;
+    font-weight: 600;
+    text-align: center;
+}
+
+.mensaje-final {
+    font-size: 1.1rem;
+    text-align: center;
+}
+
+
+/* ---------- 14. FINAL ---------- */
+
+.final > h2 {
+    font-family: "Old Standard TT", Georgia, serif;
+    font-size: 2.4rem;
+    text-align: center;
+}
+
+#final-ganadora > h2 {
+    font-size: 3.5rem;
+}
+
+
+/* =========================================================
+   15. RESPONSIVE
+   ========================================================= */
+
+/* TABLET: 2 tarjetas por fila y cajas más anchas */
+@media screen and (max-width: 900px) {
+    .pantalla {
+        padding: 2.5rem 2rem;
+    }
+
+    .fila-tarjetas,
+    #sala > .fila-tarjetas {
+        grid-template-columns: repeat(2, 1fr);
+        width: 100%;
+    }
+
+    .comedor > header,
+    .cabecera-test {
+        width: 100%;
+    }
+
+    .caja-nombre,
+    .caja-resultado,
+    .caja-minijuego {
+        width: 75%;
+    }
+
+    .fila-ingredientes {
+        grid-template-columns: repeat(3, 1fr);
+    }
+
+    .tablero {
+        width: min(100%, calc((100vh - 13rem) * 1.539));
+    }
+}
+
+/* PANTALLA MÁS ESTRECHA QUE LA IMAGEN (móvil o tablet, ventana casi
+   cuadrada): para cubrirla, el tablero tendría que recortarse por los
+   LADOS y no se verían las torres ni los caballos. Aquí el tablero
+   va a todo el ancho, centrado en la pantalla (sin recortar), y arriba
+   y abajo se ve el color de fondo.
+   max-aspect-ratio: 1556/1011 = "si la pantalla es igual o más
+   estrecha que la imagen del ajedrez". */
+@media screen and (max-aspect-ratio: 1556/1011) {
+    .tablero {
+        width: 100%;
+    }
+}
+
+/* PANTALLA MUY BAJITA (móvil en horizontal): textos del ajedrez más
+   pequeños para que no tapen las piezas */
+@media screen and (max-height: 500px) {
+    #ajedrez-juego {
+        padding-top: 0.6rem;
+        gap: 0.4rem;
+    }
+
+    #ajedrez-juego > .navegacion-minijuego > .boton {
+        padding: 0.3rem 0.8rem;
+        font-size: 0.8rem;
+    }
+
+    #ajedrez-juego > .ronda {
+        font-size: 1rem;
+    }
+
+    #ajedrez-juego > .estado-juego {
+        padding: 0.3rem 0.8rem;
+        font-size: 0.85rem;
+    }
+}
+
+
+/* MÓVIL: una columna y las cajas ocupan todo el ancho */
+@media screen and (max-width: 600px) {
+    h1 {
+        font-size: 1.6rem;
+    }
+
+    h2,
+    .comedor > header > h2 {
+        font-size: 1.4rem;
+    }
+
+    .pantalla {
+        padding: 2rem 1rem;
+        align-items: stretch;
+        gap: 1.5rem;
+    }
+
+    /* alacena: título arriba y sobre debajo, en una sola columna */
+    #alacena {
+        grid-template-columns: 1fr;
+    }
+
+    #alacena > header {
+        grid-column: 1;
+        text-align: center;
+    }
+
+    .boton-carta {
+        grid-column: 1;
+    }
+
+    /* las cajas dejan de tener ancho fijo y ocupan toda la pantalla */
+    .caja-nombre,
+    .carta,
+    .caja-resultado,
+    .caja-minijuego,
+    .caja-enhorabuena {
+        width: auto;
+        padding: 1.5rem;
+    }
+
+    .caja-resultado {
+        grid-template-columns: 1fr;
+        text-align: center;
+    }
+
+    .caja-resultado > img {
+        width: 50%;
+    }
+
+    /* casas y minijuegos: una tarjeta por fila */
+    #casas > .fila-tarjetas,
+    #sala > .fila-tarjetas {
+        grid-template-columns: 1fr;
+    }
+
+    /* respuestas y marcadores: dos por fila, para pulsar con el dedo */
+    .tarjeta-respuesta {
+        padding: 1rem 0.6rem;
+        font-size: 0.85rem;
+    }
+
+    .sombrero-con-lineas > img {
+        width: 4.5rem;
+    }
+
+    .navegacion-minijuego {
+        align-self: stretch;
+    }
+
+    .navegacion-minijuego > .boton {
+        flex-grow: 1;
+    }
+
+    .ingrediente-arrastrable {
+        width: 4rem;
+    }
+
+    .llave > img {
+        width: 3.5rem;
+    }
+
+    .marcador > .puntos {
+        font-size: 2.5rem;
+    }
+
+    /* escudos más pequeños cuando las casas van una debajo de otra */
+    #casas > .fila-tarjetas > .tarjeta-casa > img,
+    .tarjeta-casa > img {
+        height: 5rem;
+    }
+
+    .final > h2 {
+        font-size: 1.8rem;
+    }
+
+    #final-ganadora > h2 {
+        font-size: 2.4rem;
+    }
 }

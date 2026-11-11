@@ -1,216 +1,29 @@
 <!DOCTYPE html>
-<!-- Definimos el idioma del documento como español para favorecer la accesibilidad web -->
 <html lang="es">
 <head>
-  <!-- Definición de la codificación de caracteres para que reconozca tildes y la 'ñ' -->
-  <meta charset="UTF-8">
-  
-  <!-- Configuración Responsive: asegura que la escala se adecue al ancho del dispositivo (móvil, tablet, PC) -->
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  
-  <!-- Título de la pestaña del navegador -->
-  <title>Harry Potter - La Carta de Hogwarts</title>
-  
-  <!-- Conexión previa a los servidores de Google Fonts para acelerar la carga de las fuentes -->
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  
-  <!-- Importación de fuentes de Google Fonts: 'Cinzel' (para títulos mágicos) y 'Montserrat' (para textos legibles) -->
-  <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@700&family=Montserrat:wght@500;700&display=swap" rel="stylesheet">
-  
-  <!-- Enlace a nuestra hoja de estilos externa CSS -->
-  <link rel="stylesheet" href="style.css">
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Hogwarts: tu propia aventura</title>
+
+    <!-- Tipografías del Figma (Google Fonts):
+         Cinzel → títulos · Old Standard TT → títulos del Gran Comedor y botones
+         Inter → textos · IM Fell English → la carta de Hogwarts -->
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;700&family=IM+Fell+English&family=Inter:wght@400;600&family=Old+Standard+TT&display=swap">
+
+    <!-- Hoja de estilos -->
+    <link rel="stylesheet" href="style.css">
 </head>
 <body>
 
-  <!-- ==========================================================================
-       ESCENA 1: LA ALACENA BAJO LAS ESCALERAS
-       ========================================================================== -->
-  <main id="escena-alacena" class="escena-alacena">
+    <!--
+        Aquí se pinta cada pantalla de la web, una cada vez.
+        El HTML de cada pantalla está en code.js, dentro de una función
+        (pintarAlacena, pintarCarta, pintarTorneo...), y se escribe aquí
+        con innerHTML.
+    -->
+    <main id="pantalla"></main>
 
-    <!-- CABECERA DE TITULAR: Título superior ubicado a la derecha -->
-    <header id="bloque-titulo" class="bloque-titulo">
-      <h1 class="titulo-bienvenida">BIENVENIDO<br>PEQUEÑO MAGO</h1>
-    </header>
-
-    <!-- ZONA INTERACTIVA DEL SOBRE -->
-    <button type="button" id="btn-carta" class="zona-sobre" aria-label="Abrir carta de Hogwarts">
-      <div class="contenedor-icono">
-        <img src="assets/img/icono-carta-03.png" alt="Carta de Hogwarts" class="icono-sobre">
-      </div>
-      <span class="texto-sobre">¡TE HA LLEGADO<br>UNA CARTA!</span>
-    </button>
-
-    <!-- SECCIÓN MODAL DEL FORMULARIO DE NOMBRE -->
-    <section id="modal-formulario" class="modal-formulario oculto">
-      <form id="form-nombre" class="caja-formulario">
-        <h2 class="titulo-formulario">¿CÓMO TE LLAMAS?</h2>
-        <input 
-          type="text" 
-          id="input-nombre" 
-          class="input-nombre" 
-          placeholder="Introduce tu nombre..." 
-          autocomplete="off"
-          required
-        >
-        <button type="submit" id="btn-continuar" class="btn-continuar">
-          CONTINUAR
-        </button>
-      </form>
-    </section>
-
-    <!-- SECCIÓN DE LA CARTA DESPLEGADA DE HOGWARTS -->
-    <article id="modal-carta-abierta" class="modal-carta-abierta oculto">
-      <div class="caja-carta">
-        <div class="contenedor-escudo">
-          <img src="assets/img/icono-howgarts-04.png" alt="Escudo de Hogwarts" class="escudo-hogwarts">
-        </div>
-        <p id="saludo-carta" class="saludo-carta">Querido/a Paula,</p>
-        <p class="parrafo-carta">
-          Tenemos el placer de informarle de que ha sido admitida en el colegio Hogwarts de magia y hechicería.
-        </p>
-        <p class="parrafo-carta">
-          Aquí encontrará una lista de todos los libros y equipamiento necesarios.
-        </p>
-        <div class="firma-carta">
-          <p>Atentamente,</p>
-          <p class="nombre-firma">Minerva McGonagall.</p>
-        </div>
-        <button type="button" id="btn-entrar-hogwarts" class="btn-entrar-hogwarts">
-          Entrar en Hogwarts
-        </button>
-      </div>
-    </article>
-
-  </main>
-
-  <!-- ==========================================================================
-       ESCENA 2: EL GRAN COMEDOR Y LAS CUATRO CASAS
-       ========================================================================== -->
-  <section id="escena-gran-comedor" class="escena-gran-comedor oculto">
-    
-    <header class="header-gran-comedor">
-      <h2 class="titulo-gran-comedor">LAS CUATRO CASAS DE HOGWARTS</h2>
-      <p class="subtitulo-gran-comedor">
-        En la escuela existen 4 casas: Gryffindor, Ravenclaw, Slitherin y Huflepuff. Tras recibir tu carta, el sombrero seleccionador te asignará una casa, y tú tendrás que superar pruebas para ganar la copa de la casa.
-      </p>
-    </header>
-
-    <div class="contenedor-casas">
-      <article class="tarjeta-casa tarjeta-gryffindor">
-        <div class="caja-imagen-casa">
-          <img src="assets/img/escudo-gryffindor.png" alt="Escudo de Gryffindor" class="imagen-escudo-casa">
-        </div>
-        <h3 class="nombre-casa">GRIFFINDOR</h3>
-        <p class="descripcion-casa">
-          Donde habitan los valientes de corazón. Su audacia, temple y caballerosidad destacan a los caballeros de Gryffindor. ¡Su animal es el león!
-        </p>
-      </article>
-
-      <article class="tarjeta-casa tarjeta-ravenclaw">
-        <div class="caja-imagen-casa">
-          <img src="assets/img/escudo-ravenclaw.avif" alt="Escudo de Ravenclaw" class="imagen-escudo-casa">
-        </div>
-        <h3 class="nombre-casa">RAVENCLAW</h3>
-        <p class="descripcion-casa">
-          La casa de la sabiduría, la creatividad y el aprendizaje. Si tienes una mente curiosa y te encanta descubrir cosas nuevas, este es tu hogar. ¡Su animal es el águila!
-        </p>
-      </article>
-
-      <article class="tarjeta-casa tarjeta-slytherin">
-        <div class="caja-imagen-casa">
-          <img src="assets/img/escudo-slitherin.png" alt="Escudo de Slytherin" class="imagen-escudo-casa">
-        </div>
-        <h3 class="nombre-casa">SLITHERIN</h3>
-        <p class="descripcion-casa">
-          Para los astutos y ambiciosos que utilizan cualquier medio para lograr sus grandes metas. Son líderes natos llenos de destreza. ¡Su animal es la serpiente!
-        </p>
-      </article>
-
-      <article class="tarjeta-casa tarjeta-hufflepuff">
-        <div class="caja-imagen-casa">
-          <img src="assets/img/escudo-hufflepuff.webp" alt="Escudo de Hufflepuff" class="imagen-escudo-casa">
-        </div>
-        <h3 class="nombre-casa">HUFLEPUFF</h3>
-        <p class="descripcion-casa">
-          Donde son justos, leales, trabajadores y verdaderos amigos. En Hufflepuff la paciencia y el valor de la amistad están por encima de todo. ¡Su animal es el tejón!
-        </p>
-      </article>
-    </div>
-
-    <div class="contenedor-btn-test">
-      <button type="button" id="btn-ir-test" class="btn-ir-test">
-        Descubre a qué casa perteneces
-      </button>
-    </div>
-
-  </section>
-
-  <!-- ==========================================================================
-       ESCENA 3: TEST DEL SOMBRERO SELECCIONADOR
-       ========================================================================== -->
-  <section id="escena-test-sombrero" class="escena-test-sombrero oculto">
-    
-    <div class="contenedor-sombrero">
-      <img src="assets/img/sombrero-seleccionador.png" alt="Sombrero Seleccionador" class="imagen-sombrero">
-    </div>
-
-    <header class="header-pregunta">
-      <h2 id="texto-pregunta" class="titulo-pregunta">
-        SI TUVIERAS UN SUPERPODER, ¿CUÁL ELEGIRÍAS?
-      </h2>
-    </header>
-
-    <div id="contenedor-respuestas" class="contenedor-respuestas">
-      <!-- Opciones dinámicas inyectadas mediante JS -->
-    </div>
-
-    <div class="contenedor-btn-siguiente">
-      <button type="button" id="btn-siguiente-pregunta" class="btn-siguiente-pregunta">
-        Siguiente pregunta
-      </button>
-    </div>
-
-  </section>
-
-  <!-- ==========================================================================
-       NUEVO: ESCENA 4: RESULTADO DEL TEST (LA CASA ASIGNADA AL NIÑO)
-       ========================================================================== -->
-  <section id="escena-resultado-casa" class="escena-resultado-casa oculto">
-    
-    <!-- Título principal calcado a tu diseño de Figma -->
-    <header class="header-resultado">
-      <h2 class="titulo-resultado-encabezado">ENHORABUENA, TU CASA ES...</h2>
-    </header>
-
-    <!-- Tarjeta horizontal contenedora del resultado -->
-    <div class="tarjeta-resultado-casa">
-      
-      <!-- Contenedor del escudo de la casa asignada (con textura pergamino clara) -->
-      <div class="caja-escudo-resultado">
-        <img id="imagen-escudo-resultado" src="assets/img/escudo-gryffindor-resultado.png" alt="Escudo de la Casa Asignada" class="escudo-resultado-img">
-      </div>
-
-      <!-- Contenido textual con título de la casa y descripción personalizada -->
-      <div class="info-resultado-casa">
-        <h3 id="nombre-casa-resultado" class="nombre-casa-resultado">GRYFFINDOR!!</h3>
-        <p id="descripcion-casa-resultado" class="descripcion-casa-resultado">
-          ¡Enhorabuena, has entrado en Gryffindor! Esta es la casa de los valientes, los audaces y los que nunca se rinden ante los desafíos. En Gryffindor destacan aquellos que tienen un corazón de león, listos para defender a sus amigos, hacer lo correcto incluso cuando da miedo y lanzarse a grandes aventuras. Tu fuerza interior, tu entusiasmo y tu valor para superar cualquier obstáculo demuestran que llevas dentro la auténtica magia de un verdadero Gryffindor.
-        </p>
-      </div>
-
-    </div>
-
-    <!-- Botón inferior para ir al Gran Comedor e iniciar la competición -->
-    <div class="contenedor-btn-resultado">
-      <button type="button" id="btn-ir-gran-comedor-final" class="btn-ir-gran-comedor-final">
-        Ir al Gran Comedor
-      </button>
-    </div>
-
-  </section>
-
-  <!-- Enlace a tu archivo JavaScript 'code.js' -->
-  <script src="code.js"></script>
+    <script src="code.js"></script>
 </body>
 </html>
