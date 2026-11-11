@@ -1,6 +1,5 @@
 /* =========================================================
    HOGWARTS · Hoja de estilos
-   Colores y tipografías sacados de diseno/guia-estilo.md
 
    Colores principales:
    - Naranja (botones y cajas):        #F4A549
@@ -8,6 +7,10 @@
    - Azul noche (fondo de paneles):    #0F141D
    - Azul pizarra (tarjetas):          #1A2332
    - Azul grisáceo (respuestas test):  #3A4D66
+
+   Otros colores:
+   - Verde (prueba superada, acierto): #4CAF6E
+   - Rojo (la poción explota):         #FF5A36
 
    Tipografías:
    - Cinzel → títulos
@@ -233,8 +236,8 @@ h2 {
 
 /* ---------- 6. GRAN COMEDOR: FONDOS DE CADA CASA ---------- */
 
-/* Si falta la imagen de la casa, se ve su color de fondo.
-   Las 4 imágenes de las casas están marcadas con FALTA IMAGEN */
+/* Cada casa tiene su versión del Gran Comedor. El color de fondo
+   se ve mientras carga la imagen (o si no la encuentra). */
 .neutro {
     background-color: #460643;
     background-image: url("assets/img/fondo-gran-comedor.jpg");
@@ -242,22 +245,22 @@ h2 {
 
 .gryffindor {
     background-color: #5E0000;
-    background-image: url("assets/img/gran-comedor-griffindor.jpg");   /* FALTA IMAGEN */
+    background-image: url("assets/img/gran-comedor-griffindor.jpg");
 }
 
 .slytherin {
     background-color: #001E0F;
-    background-image: url("assets/img/gran-comedor-slitherin.jpg");   /* FALTA IMAGEN */
+    background-image: url("assets/img/gran-comedor-slitherin.jpg");
 }
 
 .ravenclaw {
     background-color: #001944;
-    background-image: url("assets/img/gran-comedor-ravenclaw.jpg");   /* FALTA IMAGEN */
+    background-image: url("assets/img/gran-comedor-ravenclaw.jpg");
 }
 
 .hufflepuff {
     background-color: #2A1B10;
-    background-image: url("assets/img/gran-comedor-hufflepuff.jpg");   /* FALTA IMAGEN */
+    background-image: url("assets/img/gran-comedor-hufflepuff.jpg");
 }
 
 /* cabecera de las pantallas del Gran Comedor */
@@ -295,9 +298,6 @@ h2 {
     gap: 0.6rem;
 }
 
-.tarjeta-casa:hover {
-    border-color: #F4A549;
-}
 
 /* todos los escudos con la misma altura, así los nombres quedan alineados */
 .tarjeta-casa > img {
@@ -383,7 +383,7 @@ h2 {
     border-color: #F4A549;
 }
 
-/* la respuesta elegida (la clase la pone JavaScript con un ternario) */
+/* la respuesta elegida (la clase la pone JavaScript al pulsar la tarjeta) */
 .seleccionada {
     border-color: #FFD27F;
     background-color: #4A6182;
@@ -514,12 +514,12 @@ h2 {
 
 .llaves {
     background-color: #4E4A55;
-    background-image: url("assets/img/llaves-voladoras.png");   /* FALTA IMAGEN */
+    background-image: url("assets/img/llaves-voladoras.jpg");
 }
 
 .ajedrez {
     background-color: #3A2B28;
-    background-image: url("assets/img/ajedrez-magico.png");
+    background-image: url("assets/img/ajedrez-magico.jpg");
 }
 
 /* botones "Sala de los minijuegos" y "Contador de puntos" arriba a la derecha */
@@ -598,19 +598,11 @@ h2 {
     line-height: 1.35;
 }
 
-
-/* =========================================================
-   12. MINIJUEGOS: LOS JUEGOS
-   Aquí uso propiedades que no hemos dado (position, aspect-ratio,
-   filter). Están autorizadas solo para los 3 minijuegos
-   (apuntes/resumen.md, sección 5.3).
-   ========================================================= */
-
 /* Las imágenes de dentro de ingredientes, llaves y piezas "no reciben el ratón"
    (pointer-events: none). Así:
-   - el navegador no intenta arrastrar la imagen él solo (eso cancelaba
-     nuestro arrastre de los ingredientes y no llegaban al caldero);
-   - el click siempre llega al botón que las contiene. */
+   - el navegador no arrastra la imagen por su cuenta (eso cancelaría
+     el arrastre de los ingredientes y no llegarían al caldero);
+   - el clic siempre llega al botón que las contiene. */
 .ingrediente-arrastrable > img,
 .llave > img,
 .pieza > img {
@@ -618,6 +610,14 @@ h2 {
     user-select: none;
     -webkit-user-drag: none;
 }
+
+
+
+/* =========================================================
+   12. MINIJUEGOS: LOS JUEGOS
+   Colocación de los elementos de cada juego (position), brillos
+   (filter: drop-shadow) y proporción del tablero (aspect-ratio).
+   ========================================================= */
 
 /* --- POCIONES: ingredientes alrededor del caldero --- */
 
@@ -664,7 +664,7 @@ h2 {
     display: none;
 }
 
-/* sitio de cada ingrediente (como en el Figma) */
+/* sitio de cada ingrediente alrededor del caldero */
 .lugar-escamas    { top: 5%;  left: 15%; }
 .lugar-cola       { top: 0%;  left: 55%; }
 .lugar-baba       { top: 25%; left: 35%; }
@@ -688,7 +688,7 @@ h2 {
     filter: drop-shadow(0 0 16px #FFD27F);
 }
 
-/* ¡BOOM! ingrediente equivocado: brillo ROJO */
+/* ingrediente equivocado: brillo ROJO (¡la poción explota!) */
 .explosion {
     filter: drop-shadow(0 0 20px #FF5A36) drop-shadow(0 0 40px #FF5A36);
 }
@@ -783,7 +783,7 @@ h2 {
     transform: translate(-50%, -50%);
     width: max(100%, calc(100vh * 1.539));
     aspect-ratio: 1556 / 1011;
-    background-image: url("assets/img/fondo-ajedrez.jpg");
+    background-image: url("assets/img/ajedrez-magico.jpg");
     background-size: 100% 100%;
 }
 
@@ -911,6 +911,9 @@ h2 {
         grid-template-columns: repeat(3, 1fr);
     }
 
+    .tablero {
+        width: min(100%, calc((100vh - 13rem) * 1.539));
+    }
 }
 
 /* PANTALLA MÁS ESTRECHA QUE LA IMAGEN (móvil o tablet, ventana casi
@@ -948,6 +951,7 @@ h2 {
         font-size: 0.85rem;
     }
 }
+
 
 /* MÓVIL: una columna y las cajas ocupan todo el ancho */
 @media screen and (max-width: 600px) {
