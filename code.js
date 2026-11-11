@@ -295,58 +295,61 @@ function pintarAlacena(){
     `);
 
     document.querySelector("#boton-carta").addEventListener("click", () => {
-        pintarNombre("");
+        pintarNombre();
     });
 }
 
 /* ===== Pantalla 1.2 · ¿CÓMO TE LLAMAS? =====
-   "aviso" es un mensaje que sale si el niño no escribe su nombre */
-function pintarNombre(aviso){
-    // el botón "Seguir sin nombre" solo aparece si hay aviso
-    let botonSinNombre = (aviso == "") ? "" : `<button id="sin-nombre" class="boton boton-oscuro">Seguir sin nombre</button>`;
+   El niño escribe su nombre directamente en el recuadro naranja
+   (cambio pedido por la profesora: antes salía una ventana con prompt).
 
+   Uso cosas que no hemos dado (autorizadas en apuntes/resumen.md, 5.4):
+   · <input type="text">: un campo para escribir.
+   · <label for="...">: el texto que "nombra" el campo. Si pulsas en
+     él, el cursor salta al campo (y ayuda a los lectores de pantalla).
+   · campo.value: el texto que hay escrito dentro del campo.
+   · campo.focus(): pone el cursor en el campo para escribir directamente.
+   · evento.key: qué tecla se ha pulsado (para que Enter también sirva). */
+function pintarNombre(){
     cambiarPantalla(`
         <section id="nombre" class="pantalla alacena">
             <div class="caja-nombre">
-                <h2>¿Cómo te llamas?</h2>
-                <button id="boton-nombre" class="campo-nombre">Introduce tu nombre...</button>
-                <p class="aviso">${aviso}</p>
-                ${botonSinNombre}
+                <h2><label for="campo-nombre">¿Cómo te llamas?</label></h2>
+                <input id="campo-nombre" class="campo-nombre" type="text" placeholder="Introduce tu nombre..." maxlength="20" autocomplete="off">
+                <p id="aviso-nombre" class="aviso"></p>
+                <button id="boton-nombre" class="boton boton-oscuro">Abrir mi carta</button>
             </div>
         </section>
     `);
 
+    const campo = document.querySelector("#campo-nombre");
+    campo.focus();
+
+    // al pulsar el botón...
     document.querySelector("#boton-nombre").addEventListener("click", () => {
-        pedirNombre();
+        guardarNombre();
     });
 
-    if(aviso != ""){
-        document.querySelector("#sin-nombre").addEventListener("click", () => {
-            nombre = "joven mago";
-            pintarCarta();
-        });
-    }
+    // ...o al pulsar Enter dentro del campo
+    campo.addEventListener("keydown", (evento) => {
+        if(evento.key == "Enter"){
+            guardarNombre();
+        }
+    });
 }
 
-// pide el nombre con prompt() y lo guarda
-function pedirNombre(){
-    let respuesta = prompt("¿Cómo te llamas?");
+// lee el nombre del recuadro y, si está bien, abre la carta
+function guardarNombre(){
+    // quito los espacios del principio y del final
+    let respuesta = document.querySelector("#campo-nombre").value.trimStart().trimEnd();
 
-    if(respuesta == null){
-        // ha pulsado "Cancelar"
-        pintarNombre("Necesitamos tu nombre para escribirte la carta.");
+    if(respuesta.length == 0){
+        document.querySelector("#aviso-nombre").textContent = "Escribe tu nombre para poder seguir.";
     }else{
-        // quito los espacios del principio y del final
-        respuesta = respuesta.trimStart().trimEnd();
-
-        if(respuesta.length == 0){
-            pintarNombre("Escribe tu nombre para poder seguir.");
-        }else{
-            // primera letra en mayúscula: "paula" → "Paula"
-            nombre = `${respuesta[0].toUpperCase()}${respuesta.slice(1)}`;
-            console.log(`Nombre guardado: ${nombre}`);
-            pintarCarta();
-        }
+        // primera letra en mayúscula: "paula" → "Paula"
+        nombre = `${respuesta[0].toUpperCase()}${respuesta.slice(1)}`;
+        console.log(`Nombre guardado: ${nombre}`);
+        pintarCarta();
     }
 }
 
@@ -679,13 +682,17 @@ function pintarTorneo(){
 
 /* ===== Pantalla 4 · SALA DE LOS MINIJUEGOS (diseno/4-sala-minijuegos.png) ===== */
 
-// HTML de la tarjeta de un minijuego
+/* HTML de la tarjeta de un minijuego.
+   Si ya está superado, la tarjeta y el botón llevan otras clases
+   ("tarjeta-superada" y "boton-superado") y cambian de aspecto:
+   sello verde de "Superada", borde verde y botón verde. */
 let tarjetaMinijuego = (id, imagen, titulo, texto, superado) => `
-    <div class="tarjeta-minijuego">
+    <div class="tarjeta-minijuego ${superado ? "tarjeta-superada" : ""}">
+        ${superado ? `<p class="sello-superada">✓ Superada</p>` : ""}
         <img src="assets/img/${imagen}" alt="">
         <h3>${titulo}</h3>
-        <p>${superado ? "¡Prueba superada!" : texto}</p>
-        <button id="${id}" class="boton">${superado ? "Volver a jugar" : "Jugar"}</button>
+        <p>${superado ? "¡Prueba superada! Puedes repetirla, pero ya no suma puntos." : texto}</p>
+        <button id="${id}" class="boton ${superado ? "boton-superado" : ""}">${superado ? "Volver a jugar" : "Jugar"}</button>
     </div>`;
 
 function pintarSala(){
@@ -1034,6 +1041,13 @@ function echarIngrediente(ingrediente){
     if(numero == siguienteIngrediente){
         // ¡correcto! el ingrediente desaparece dentro del caldero
         ingrediente.classList.add("dentro-del-caldero");
+
+        // el caldero brilla en VERDE durante 0,8 segundos (cuando falla, brilla en rojo)
+        const caldero = document.querySelector("#caldero");
+        caldero.classList.add("acierto");
+        esperar(800, () => {
+            caldero.classList.remove("acierto");
+        });
         estado.textContent = `¡Bien! Llevas ${siguienteIngrediente} de 6 ingredientes.`;
         siguienteIngrediente++;
 
@@ -1093,9 +1107,9 @@ function pintarLlavesExplicacion(){
 const totalLlaves = 12;
 
 /* VELOCIDAD DE LAS LLAVES: cuánto del ancho de la pantalla recorren
-   en un segundo (0.05 = un 5 %). Para que vayan más lentas, bájalo
+   en un segundo (0.3 = un 30 %). Para que vayan más lentas, bájalo
    (por ejemplo 0.03); para que vayan más rápidas, súbelo. */
-const velocidadLlaves = 0.05;
+const velocidadLlaves = 0.3;
 
 function pintarLlavesJuego(){
     cambiarPantalla(`
@@ -1135,7 +1149,7 @@ function empezarLlaves(){
     let llaves = [];
 
     // velocidad en píxeles POR SEGUNDO, según el ancho de la pantalla
-    // (en una pantalla de 1500 px: unos 75 px por segundo como mucho)
+    // (con velocidadLlaves = 0.3, en una pantalla de 1500 px: hasta unos 450 px por segundo)
     let velocidad = cielo.clientWidth * velocidadLlaves;
     // si el sistema pide "reducir movimiento", vuelan mucho más despacio (accesibilidad)
     if(window.matchMedia("(prefers-reduced-motion: reduce)").matches){

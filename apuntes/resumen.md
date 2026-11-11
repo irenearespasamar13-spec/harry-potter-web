@@ -294,7 +294,7 @@ Autorizado por Irene el 07/11/2026 para la web de Harry Potter. Todo lo que no e
 | `window.scrollTo(0, 0)` | Volver arriba al cambiar de pantalla (si no, en el móvil la pantalla nueva sale a mitad). Añadido en la fase 3 (aprobado) |
 
 ### 5.2 Alternativas con lo dado (aprobadas)
-- **Nombre del niño**: se pide con `prompt()`.
+- **Nombre del niño**: al principio se pedía con `prompt()`. Después de la corrección de la profesora se escribe en un campo (ver 5.4).
 - **Cambiar de pantalla**: cada pantalla es una función que devuelve su HTML en una plantilla literal y se pinta con `innerHTML`. El color de la casa va dentro de la plantilla como clase: `class="comedor ${casa}"`.
 - **Puntos de las otras casas**: suben una cantidad fija cada vez que el niño vuelve al marcador (sin `setInterval`). La casa del niño siempre gana.
 - **Final**: botón "Descubrir la casa ganadora" en lugar de esperar 3 segundos (sin `setTimeout`).
@@ -306,3 +306,13 @@ Autorizado usar conocimientos no dados para que los minijuegos funcionen **tal c
 - **Ajedrez mágico**: piezas que se iluminan al azar, una más por ronda, durante 8 rondas (temporizadores y números aleatorios).
 - En el JS de los juegos: `setTimeout`, `requestAnimationFrame`, `Math.random`/`Math.floor`, arrays y objetos, `classList`, `style.transform`, eventos `pointerdown`/`pointermove`/`pointerup`, `getBoundingClientRect`, `dataset` y el atributo `aria-live` (accesibilidad). Todo explicado en la parte 4 de `code.js`.
 - En el CSS de los juegos: `position` (relative/absolute) con `top`/`left`/`bottom`, `aspect-ratio` y `filter: drop-shadow()` para el brillo.
+
+### 5.4 Cambios pedidos por la profesora (corrección del 10/11/2026)
+- **Nombre escrito en el recuadro naranja** en vez de una ventana `prompt()`. Para eso se usa:
+  - `<input type="text">` con `placeholder` y `maxlength`, y `<label for="...">` (accesibilidad).
+  - `campo.value` para leer lo escrito y `campo.focus()` para poner el cursor en el campo.
+  - El evento `keydown` (está en la tabla de eventos) con `evento.key == "Enter"`.
+  - En CSS: `:focus` y `::placeholder`.
+- **Caldero verde al acertar** (como el rojo al fallar): clase `acierto` con `filter: drop-shadow()` (zona de minijuegos).
+- **Minijuego superado con otra apariencia**: tarjeta con borde verde, sello "✓ Superada" y botón verde. Solo con clases y el operador ternario (temario).
+- **Fondos con la estética de la alacena** (ilustración plana y sencilla): trabajo de ilustración, no de código.

@@ -169,19 +169,40 @@ h2 {
     gap: 1rem;
 }
 
-/* parece un campo de texto, pero es un botón que abre un prompt() */
+/* el campo donde el niño escribe su nombre (un <input>) */
 .campo-nombre {
     background-color: transparent;
     border: 1px solid #1A2332;
     padding: 0.8rem 1rem;
-    text-align: left;
     font-family: "Inter", Arial, sans-serif;
     font-size: 1rem;
-    color: #3B2A12;
+    color: #111111;
+}
+
+/* el texto gris de ejemplo ("Introduce tu nombre...") */
+.campo-nombre::placeholder {
+    color: #5C4328;
+}
+
+/* al pasar el ratón o al escribir dentro, el campo se pone amarillo */
+.campo-nombre:hover,
+.campo-nombre:focus {
+    background-color: #FFD27F;
+}
+
+/* el título "¿Cómo te llamas?" es la etiqueta (label) del campo */
+.caja-nombre > h2 > label {
     cursor: pointer;
 }
 
-.campo-nombre:hover {
+/* botón "Abrir mi carta", a la derecha */
+.caja-nombre > .boton {
+    align-self: flex-end;
+}
+
+/* dentro del recuadro naranja, el hover es amarillo
+   (si fuera naranja, el botón "desaparecería" sobre el fondo) */
+.caja-nombre > .boton-oscuro:hover {
     background-color: #FFD27F;
 }
 
@@ -448,6 +469,41 @@ h2 {
     font-size: 0.85rem;
 }
 
+/* --- MINIJUEGO YA SUPERADO ---
+   La tarjeta, el sello y el botón cambian a VERDE para que se vea
+   de un vistazo que esa prueba ya está hecha. */
+.tarjeta-superada {
+    border-color: #4CAF6E;
+}
+
+.tarjeta-superada:hover {
+    border-color: #7FDB9E;
+}
+
+/* sello "✓ Superada" encima de la imagen ("> .sello-superada" para que gane a ".tarjeta-minijuego > p") */
+.tarjeta-minijuego > .sello-superada {
+    align-self: center;
+    background-color: #4CAF6E;
+    color: #0F141D;
+    font-weight: 600;
+    font-size: 0.8rem;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    padding: 0.2rem 0.8rem;
+}
+
+/* botón "Volver a jugar": verde con borde, en vez de naranja */
+.boton-superado {
+    background-color: transparent;
+    color: #7FDB9E;
+    border: 2px solid #4CAF6E;
+}
+
+.boton-superado:hover {
+    background-color: #4CAF6E;
+    color: #0F141D;
+}
+
 
 /* ---------- 11. MINIJUEGOS: PARTES COMUNES ---------- */
 
@@ -632,9 +688,14 @@ h2 {
     filter: drop-shadow(0 0 16px #FFD27F);
 }
 
-/* ¡BOOM! */
+/* ¡BOOM! ingrediente equivocado: brillo ROJO */
 .explosion {
     filter: drop-shadow(0 0 20px #FF5A36) drop-shadow(0 0 40px #FF5A36);
+}
+
+/* ingrediente correcto: brillo VERDE (lo pone JavaScript 0,8 segundos) */
+.acierto {
+    filter: drop-shadow(0 0 20px #4CD964) drop-shadow(0 0 40px #4CD964);
 }
 
 .caldero > img {
